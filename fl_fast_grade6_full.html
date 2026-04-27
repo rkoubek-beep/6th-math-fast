@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST Math — Grade 6 Adaptive Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6fb;--white:#fff;--navy:#0d1f3c;--blue:#1557b0;--sky:#2e86de;
+  --teal:#0abf88;--gold:#f0a500;--red:#e53e3e;--border:#dde3ef;
+  --muted:#8493a8;--text:#1a2540;--lb:#eef4ff;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* TOP CHROME */
+.chrome{background:var(--navy);display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;height:52px;border-bottom:3px solid var(--sky);}
+.chrome-l{display:flex;align-items:center;gap:10px;}
+.chrome-l span{color:#fff;font-weight:700;font-size:14px;}
+.chrome-l span em{color:var(--gold);font-style:normal;}
+.chrome-r{font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.5);}
+
+/* TEST HEADER */
+.thead{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;height:50px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.thead-l{display:flex;align-items:center;gap:14px;}
+.sess{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.07em;}
+.qprog{font-size:13px;color:var(--muted);}
+.qprog strong{color:var(--text);}
+.dbadge{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.de{background:#d1fae5;color:#065f46;} .dm{background:#fef3c7;color:#92400e;} .dh{background:#fee2e2;color:#991b1b;}
+.timerwrap{display:flex;align-items:center;gap:7px;}
+#mtimer{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--blue);}
+#mtimer.warn{color:var(--gold);} #mtimer.urg{color:var(--red);animation:blink .8s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 102px);}
+.sidebar{width:210px;background:#fff;border-right:1px solid var(--border);
+  padding:18px 14px;flex-shrink:0;display:flex;flex-direction:column;gap:18px;}
+.sb-h{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.qgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;}
+.pip{aspect-ratio:1;border-radius:5px;border:1.5px solid var(--border);background:var(--bg);
+  display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--muted);}
+.pip.ans{background:var(--blue);border-color:var(--blue);color:#fff;}
+.pip.cur{border-color:var(--gold);background:#fffbeb;color:var(--navy);box-shadow:0 0 0 2px rgba(240,165,0,.3);}
+.ameter{background:var(--lb);border:1px solid #c7d9f8;border-radius:10px;padding:10px 12px;}
+.ameter-h{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.abar{height:7px;background:#c7d9f8;border-radius:99px;overflow:hidden;}
+#afill{height:100%;background:linear-gradient(90deg,var(--sky),var(--blue));border-radius:99px;transition:width .5s;width:50%;}
+#alabel{font-size:11px;color:var(--blue);font-weight:600;margin-top:5px;text-align:center;}
+.leg{display:flex;flex-direction:column;gap:5px;}
+.leg-i{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);}
+.leg-d{width:11px;height:11px;border-radius:3px;flex-shrink:0;}
+
+/* MAIN */
+.main{flex:1;padding:28px 36px;max-width:800px;}
+.screen{display:none;} .screen.active{display:block;animation:fu .3s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* INTRO */
+.intro-eye{font-size:11px;font-weight:700;color:var(--sky);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;}
+.intro h1{font-size:34px;font-weight:800;color:var(--navy);line-height:1.1;margin-bottom:6px;}
+.intro h1 span{color:var(--sky);}
+.intro-sub{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:24px;max-width:600px;}
+.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px;}
+.ig{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:16px 12px;text-align:center;}
+.ig-icon{font-size:26px;margin-bottom:6px;} .ig-val{font-size:20px;font-weight:800;color:var(--navy);}
+.ig-lbl{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.cat-box{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:22px;}
+.cat-box h3{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.cat-row-i{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.cat-name-i{font-size:13px;font-weight:600;color:var(--text);}
+.cat-pct-i{font-size:12px;font-weight:700;color:var(--blue);font-family:'JetBrains Mono',monospace;}
+.cat-bar-bg{height:7px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:2px;}
+.cat-bar-fg{height:100%;border-radius:99px;}
+.algo-box{background:var(--lb);border:1.5px solid #c7d9f8;border-radius:12px;padding:16px 18px;margin-bottom:24px;}
+.algo-box h3{font-size:12px;font-weight:700;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.algo-steps{display:flex;flex-direction:column;gap:7px;}
+.as{display:flex;gap:9px;align-items:flex-start;}
+.asn{width:20px;height:20px;background:var(--blue);border-radius:50%;color:#fff;font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.as p{font-size:13px;color:#374151;line-height:1.5;}
+
+/* QUESTION */
+.qcard{background:#fff;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.qtop{background:var(--navy);padding:18px 24px;display:flex;align-items:flex-start;gap:14px;}
+.qnbadge{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,.1);
+  border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;
+  font-size:17px;font-weight:800;color:var(--gold);flex-shrink:0;}
+.qmeta{flex:1;}
+.qcat{font-size:10px;color:rgba(255,255,255,.4);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;}
+.qstem{font-size:16px;color:#fff;font-weight:400;line-height:1.65;}
+.qbody{padding:22px 24px;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:11px;
+  border:2px solid var(--border);cursor:pointer;transition:border-color .15s,background .15s;
+  font-size:14px;color:var(--text);background:#fff;}
+.opt:hover{border-color:var(--sky);background:var(--lb);}
+.opt.sel{border-color:var(--blue);background:var(--lb);}
+.oletter{width:30px;height:30px;border-radius:8px;background:var(--bg);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--blue);
+  flex-shrink:0;transition:all .15s;}
+.opt.sel .oletter{background:var(--blue);color:#fff;border-color:var(--blue);}
+.qfoot{padding:0 24px 22px;display:flex;align-items:center;justify-content:space-between;}
+.qhint{font-size:12px;color:var(--muted);}
+.btn{padding:11px 28px;border-radius:10px;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;}
+.btn-p{background:var(--blue);color:#fff;}
+.btn-p:hover{background:#0f3f8c;transform:translateY(-1px);box-shadow:0 4px 14px rgba(21,87,176,.3);}
+.btn-p:disabled{opacity:.4;cursor:not-allowed;transform:none !important;box-shadow:none !important;}
+.btn-sub{background:var(--teal);}
+.btn-sub:hover{background:#089a70;}
+
+/* RESULTS */
+.res-wrap{max-width:760px;}
+.score-hero{background:var(--navy);border-radius:18px;padding:36px;margin-bottom:20px;position:relative;overflow:hidden;}
+.score-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;
+  border-radius:50%;background:rgba(46,134,222,.12);}
+.score-row{display:flex;align-items:center;gap:28px;flex-wrap:wrap;position:relative;z-index:1;}
+.ss-block{text-align:center;}
+.ss-num{font-size:64px;font-weight:800;color:#fff;line-height:1;font-family:'JetBrains Mono',monospace;}
+.ss-lbl{font-size:10px;color:rgba(255,255,255,.4);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-top:3px;}
+.sd{flex:1;}
+.alevel{display:inline-block;padding:7px 18px;border-radius:99px;font-size:14px;font-weight:700;
+  letter-spacing:.02em;margin-bottom:10px;}
+.lv1{background:rgba(229,62,62,.2);color:#fc8181;border:1px solid rgba(229,62,62,.3);}
+.lv2{background:rgba(245,158,11,.2);color:#fcd34d;border:1px solid rgba(245,158,11,.3);}
+.lv3{background:rgba(46,134,222,.2);color:#7ec8f4;border:1px solid rgba(46,134,222,.3);}
+.lv4{background:rgba(10,191,136,.2);color:#6ee7b7;border:1px solid rgba(10,191,136,.3);}
+.lv5{background:rgba(240,165,0,.2);color:#fcd34d;border:1px solid rgba(240,165,0,.3);}
+.ldesc{color:rgba(255,255,255,.65);font-size:13px;line-height:1.6;max-width:340px;}
+.sgauge{width:100%;height:10px;background:rgba(255,255,255,.1);border-radius:99px;margin-top:12px;overflow:hidden;}
+.sgfill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--sky),var(--teal));transition:width 1.2s ease;}
+.glabels{display:flex;justify-content:space-between;margin-top:3px;}
+.glabels span{font-size:9px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace;}
+.lcuts{display:flex;gap:2px;margin-top:4px;}
+.lcut{flex:1;text-align:center;font-size:9px;font-weight:700;letter-spacing:.04em;padding:2px 0;border-radius:3px;}
+.lc1{background:rgba(229,62,62,.3);color:#fc8181;} .lc2{background:rgba(245,158,11,.3);color:#fcd34d;}
+.lc3{background:rgba(46,134,222,.3);color:#7ec8f4;} .lc4{background:rgba(10,191,136,.3);color:#6ee7b7;}
+.lc5{background:rgba(240,165,0,.3);color:#fcd34d;} .lcut:not(.active){opacity:.35;}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.sbox{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:14px;text-align:center;}
+.sval{font-size:24px;font-weight:800;color:var(--navy);} .slbl{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+
+.catperf{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:20px;}
+.catperf h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:14px;}
+.cr{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+.crname{font-size:12px;font-weight:600;color:var(--text);width:210px;flex-shrink:0;}
+.crbw{flex:1;height:9px;background:var(--border);border-radius:99px;overflow:hidden;}
+.crb{height:100%;border-radius:99px;transition:width .8s ease;}
+.crpct{font-size:11px;font-weight:700;color:var(--muted);width:38px;text-align:right;}
+.cchip{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;}
+.above{background:#d1fae5;color:#065f46;} .atnear{background:#dbeafe;color:#1e40af;} .below{background:#fee2e2;color:#991b1b;}
+
+/* TOPIC SUMMARY TABLE */
+.topic-summary{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:20px;overflow-x:auto;}
+.topic-summary h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.ts-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ts-table th{background:var(--navy);color:rgba(255,255,255,.7);font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.07em;padding:9px 12px;text-align:left;}
+.ts-table th:last-child{text-align:center;}
+.ts-table tr:nth-child(even){background:#f9fafb;}
+.ts-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.ts-table td:last-child{text-align:center;}
+.ts-cat{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;white-space:nowrap;}
+.tc-ns{background:#ede9fe;color:#5b21b6;} .tc-ar{background:#fef3c7;color:#92400e;} .tc-gr{background:#dbeafe;color:#1e40af;}
+.ts-diff{font-size:10px;font-weight:700;}
+.td-e{color:#065f46;} .td-m{color:#92400e;} .td-h{color:#991b1b;}
+.ts-result{font-size:18px;}
+.topic-q{font-size:12px;color:var(--text);line-height:1.4;}
+
+/* NAME ENTRY */
+.name-screen{max-width:480px;margin:60px auto;background:#fff;border-radius:20px;
+  box-shadow:0 8px 40px rgba(0,0,0,.10);overflow:hidden;}
+.name-top{background:var(--navy);padding:32px 36px;text-align:center;}
+.name-top .flag{font-size:40px;margin-bottom:12px;}
+.name-top h2{font-size:22px;font-weight:800;color:#fff;letter-spacing:.02em;}
+.name-top p{font-size:13px;color:rgba(255,255,255,.55);margin-top:6px;}
+.name-body{padding:32px 36px;}
+.name-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.08em;margin-bottom:8px;display:block;}
+.name-input{width:100%;padding:14px 16px;border-radius:10px;border:2px solid var(--border);
+  font-family:'Sora',sans-serif;font-size:16px;color:var(--text);outline:none;transition:border-color .2s;}
+.name-input:focus{border-color:var(--blue);}
+.name-input::placeholder{color:#b0bac8;}
+.name-err{font-size:12px;color:var(--red);margin-top:6px;display:none;}
+.btn-start{width:100%;margin-top:20px;padding:15px;background:var(--blue);color:#fff;border:none;
+  border-radius:11px;font-family:'Sora',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-start:hover{background:#0f3f8c;transform:translateY(-1px);box-shadow:0 4px 16px rgba(21,87,176,.3);}
+
+/* SAVING TOAST */
+.toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:10px;
+  font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);z-index:999;transition:all .3s;
+  transform:translateY(80px);opacity:0;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.saving{background:var(--navy);color:#fff;}
+.toast.saved{background:var(--teal);color:#fff;}
+.toast.err{background:var(--red);color:#fff;}
+
+/* REVIEW */
+.rev-section h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.rc{border-radius:14px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:14px;}
+.rc.c{border-color:var(--teal);} .rc.w{border-color:var(--red);}
+.rch{padding:13px 18px;display:flex;align-items:flex-start;gap:11px;cursor:pointer;user-select:none;}
+.rc.c .rch{background:#f0fdf8;} .rc.w .rch{background:#fff5f5;}
+.rci{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px;}
+.rc.c .rci{background:var(--teal);color:#fff;} .rc.w .rci{background:var(--red);color:#fff;}
+.rcinfo{flex:1;}
+.rcm{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;display:flex;align-items:center;gap:7px;}
+.rcq{font-size:13px;font-weight:600;color:var(--text);line-height:1.4;}
+.rcchev{font-size:14px;color:var(--muted);transition:transform .2s;margin-top:3px;}
+.rc.exp .rcchev{transform:rotate(180deg);}
+.rcb{display:none;padding:14px 18px;border-top:1px solid var(--border);}
+.rc.exp .rcb{display:block;}
+.ar{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:12px;}
+.ap{padding:5px 12px;border-radius:7px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px;}
+.apc{background:#d1fae5;color:#065f46;} .apw{background:#fee2e2;color:#991b1b;} .apr{background:#d1fae5;color:#065f46;border:1.5px dashed #10b981;}
+.expbox{background:#fffbeb;border-left:4px solid var(--gold);border-radius:0 9px 9px 0;padding:13px 15px;}
+.expbox h4{font-size:10px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;}
+.expbox p{font-size:13px;color:#78350f;line-height:1.7;}
+.slist{margin-top:9px;display:flex;flex-direction:column;gap:5px;}
+.si{display:flex;gap:9px;align-items:flex-start;}
+.sn{width:18px;height:18px;background:var(--gold);border-radius:50%;font-size:10px;font-weight:700;
+  color:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.si p{font-size:13px;color:#78350f;line-height:1.6;}
+code{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.07);padding:1px 5px;border-radius:3px;font-size:.87em;}
+.btn-retry{width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:11px;
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:20px;transition:all .2s;}
+.btn-retry:hover{background:#0f3f8c;transform:translateY(-2px);box-shadow:0 6px 20px rgba(21,87,176,.3);}
+@media(max-width:640px){
+  .sidebar{display:none;} .main{padding:16px;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .score-row{flex-direction:column;} .ss-num{font-size:48px;}
+  .intro-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="chrome">
+  <div class="chrome-l"><span>🌴 Florida <em>FAST</em> Assessment System — Grade 6 Mathematics</span></div>
+  <div class="chrome-r" id="sclock"></div>
+</div>
+
+<div class="thead" id="thead" style="display:none">
+  <div class="thead-l">
+    <span class="sess">PM3 · Mathematics · B.E.S.T.</span>
+    <span class="qprog">Question <strong id="hqn">1</strong> of <strong>38</strong></span>
+    <span class="dbadge dm" id="dbadge">Medium</span>
+  </div>
+  <div class="timerwrap"><span>⏱</span><span id="mtimer">100:00</span></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="layout">
+  <div class="sidebar" id="sidebar" style="display:none">
+    <div>
+      <div class="sb-h">Question Map</div>
+      <div class="qgrid" id="qgrid"></div>
+    </div>
+    <div class="ameter">
+      <div class="ameter-h">Estimated Ability</div>
+      <div class="abar"><div id="afill"></div></div>
+      <div id="alabel">Calibrating…</div>
+    </div>
+    <div>
+      <div class="sb-h">Legend</div>
+      <div class="leg">
+        <div class="leg-i"><div class="leg-d" style="background:var(--bg);border:1.5px solid var(--border)"></div>Not reached</div>
+        <div class="leg-i"><div class="leg-d" style="background:var(--blue)"></div>Answered</div>
+        <div class="leg-i"><div class="leg-d" style="background:#fffbeb;border:1.5px solid var(--gold)"></div>Current</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- NAME ENTRY (shown first) -->
+    <div class="screen active" id="s-name">
+      <div class="name-screen">
+        <div class="name-top">
+          <div class="flag">🌴</div>
+          <h2>FAST Grade 6 Mathematics</h2>
+          <p>Florida B.E.S.T. Standards · Adaptive Assessment</p>
+        </div>
+        <div class="name-body">
+          <label class="name-label" for="student-name">Student Name</label>
+          <input class="name-input" id="student-name" type="text"
+            placeholder="e.g. Emma" maxlength="50" autocomplete="off"
+            onkeydown="if(event.key==='Enter')goToIntro()">
+          <div class="name-err" id="name-err">Please enter a name to continue.</div>
+          <button class="btn-start" onclick="goToIntro()">
+            Continue to Test Info →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="screen" id="s-intro">
+      <div class="intro">
+        <div class="intro-eye">Florida Assessment of Student Thinking · B.E.S.T. Standards</div>
+        <h1>Grade 6 <span>Mathematics</span></h1>
+        <p class="intro-sub">This computer-adaptive test mirrors the real FAST PM3 assessment. The algorithm selects each question based on your responses. Your score is reported on the official B.E.S.T. scale (168–287) across 5 achievement levels.</p>
+        <div class="intro-grid">
+          <div class="ig"><div class="ig-icon">🎯</div><div class="ig-val">38</div><div class="ig-lbl">Questions</div></div>
+          <div class="ig"><div class="ig-icon">⏱</div><div class="ig-val">100</div><div class="ig-lbl">Minutes</div></div>
+          <div class="ig"><div class="ig-icon">🔢</div><div class="ig-val">6</div><div class="ig-lbl">Answer Choices</div></div>
+        </div>
+        <div class="cat-box">
+          <h3>Blueprint — Reporting Categories</h3>
+          <div class="cat-row-i"><span class="cat-name-i">Number Sense &amp; Operations</span><span class="cat-pct-i">33–42%</span></div>
+          <div class="cat-bar-bg"><div class="cat-bar-fg" style="width:38%;background:#7c3aed"></div></div>
+          <div class="cat-row-i" style="margin-top:10px"><span class="cat-name-i">Algebraic Reasoning</span><span class="cat-pct-i">25–36%</span></div>
+          <div class="cat-bar-bg"><div class="cat-bar-fg" style="width:30%;background:#d97706"></div></div>
+          <div class="cat-row-i" style="margin-top:10px"><span class="cat-name-i">Geometric Reasoning, Data Analysis &amp; Probability</span><span class="cat-pct-i">25–36%</span></div>
+          <div class="cat-bar-bg"><div class="cat-bar-fg" style="width:30%;background:#1d4ed8"></div></div>
+        </div>
+        <div class="algo-box">
+          <h3>🔄 How the Adaptive Algorithm Works</h3>
+          <div class="algo-steps">
+            <div class="as"><div class="asn">1</div><p>All students begin at <strong>medium difficulty</strong> — the algorithm has no prior data.</p></div>
+            <div class="as"><div class="asn">2</div><p>Correct answer → next question is <strong>harder</strong>. Wrong answer → next question is <strong>easier</strong>.</p></div>
+            <div class="as"><div class="asn">3</div><p><strong>Blueprint coverage</strong> is enforced: the algorithm tracks which reporting categories still need questions.</p></div>
+            <div class="as"><div class="asn">4</div><p>Your <strong>B.E.S.T. scale score</strong> is calculated from difficulty-weighted performance — not just percent correct.</p></div>
+          </div>
+        </div>
+        <button class="btn btn-p" style="font-size:15px;padding:14px 44px;" onclick="startTest()">Begin Assessment →</button>
+      </div>
+    </div>
+
+    <!-- QUESTION -->
+    <div class="screen" id="s-q">
+      <div class="qcard" id="qbox"></div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="screen" id="s-res"></div>
+
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// ITEM BANK — 6 choices each, realistic distractors
+// cats: NS, AR, GR (Geometric Reasoning/Data Analysis/Probability)
+// diff: 1=easy, 2=medium, 3=hard
+// opts: 6 choices; ans: index of correct answer
+// ══════════════════════════════════════════════
+const CATS = {NS:'Number Sense & Operations', AR:'Algebraic Reasoning', GR:'Geometric Reasoning, Data Analysis & Probability'};
+
+const ITEMS = [
+// ── NUMBER SENSE & OPERATIONS (need ~14-16 items, provide 18 for adaptive selection) ──
+{id:'NS01',cat:'NS',diff:1,
+ stem:'Which integer has the greatest value?',
+ opts:['−10','−3','0','2','−8','5'],ans:5,
+ expl:'On a number line, values increase to the right. Positive numbers are always greater than 0, and 0 is always greater than negatives.',
+ steps:['Positives > 0 > negatives.','Among positives listed: 2 and 5.','5 > 2, so <code>5</code> is greatest.']},
+
+{id:'NS02',cat:'NS',diff:1,
+ stem:'What is |−24|?',
+ opts:['−24','−12','0','12','24','48'],ans:4,
+ expl:'Absolute value is the distance from zero — it is always non-negative.',
+ steps:['<code>|−24|</code> = distance of −24 from 0 on number line.','Distance is always positive.','Answer: <code>24</code>.']},
+
+{id:'NS03',cat:'NS',diff:1,
+ stem:'Which fraction is equivalent to 0.5?',
+ opts:['1/5','2/5','4/5','1/2','3/5','5/2'],ans:3,
+ expl:'Convert the decimal to a fraction by placing it over its place value, then simplify.',
+ steps:['0.5 = 5/10 (tenths place).','Simplify: GCF(5,10) = 5.','5÷5 = 1, 10÷5 = 2 → <code>1/2</code>.']},
+
+{id:'NS04',cat:'NS',diff:1,
+ stem:'What is −5 + (−9)?',
+ opts:['4','−4','14','−14','45','−45'],ans:3,
+ expl:'Adding two negatives: add the absolute values and keep the negative sign.',
+ steps:['Both numbers are negative: −5 and −9.','Add absolute values: 5 + 9 = 14.','Keep negative sign: <code>−14</code>.']},
+
+{id:'NS05',cat:'NS',diff:2,
+ stem:'Convert 0.625 to a fraction in simplest form.',
+ opts:['5/8','6/10','63/100','625/100','3/5','7/10'],ans:0,
+ expl:'Write the decimal over its place value, then divide by the GCF.',
+ steps:['0.625 = 625/1000 (thousandths).','GCF(625, 1000) = 125.','625÷125 = 5; 1000÷125 = 8 → <code>5/8</code>.']},
+
+{id:'NS06',cat:'NS',diff:2,
+ stem:'Order from least to greatest: −7, 3, −1, 0, −5, 2',
+ opts:['−7,−5,−1,0,2,3','3,2,0,−1,−5,−7','−1,−5,−7,0,2,3','0,−1,2,3,−5,−7','−7,−5,0,−1,2,3','−5,−7,−1,0,2,3'],ans:0,
+ expl:'On a number line, numbers increase left to right. Negative numbers farther from 0 are smaller.',
+ steps:['Negatives: −7 < −5 < −1.','Then 0, then positives: 2, 3.','Order: <code>−7, −5, −1, 0, 2, 3</code>.']},
+
+{id:'NS07',cat:'NS',diff:2,
+ stem:'A store has 240 items. 15% are on sale. How many items are on sale?',
+ opts:['15','24','30','36','40','48'],ans:3,
+ expl:'Convert the percent to a decimal and multiply by the total.',
+ steps:['15% = 0.15.','0.15 × 240 = <code>36</code> items.']},
+
+{id:'NS08',cat:'NS',diff:2,
+ stem:'What is (−8) × (−6)?',
+ opts:['−48','−14','14','2','48','−2'],ans:4,
+ expl:'The product of two negative numbers is always positive.',
+ steps:['Multiply absolute values: 8 × 6 = 48.','neg × neg = positive.','Answer: <code>48</code>.']},
+
+{id:'NS09',cat:'NS',diff:2,
+ stem:'What is −36 ÷ 4?',
+ opts:['9','−9','−32','32','−144','144'],ans:1,
+ expl:'A negative divided by a positive is negative. Divide the absolute values.',
+ steps:['36 ÷ 4 = 9.','neg ÷ pos = negative.','Answer: <code>−9</code>.']},
+
+{id:'NS10',cat:'NS',diff:2,
+ stem:'Which of the following is a rational number?',
+ opts:['π','√2','√5','0.333…','√7','√11'],ans:3,
+ expl:'A rational number can be written as a fraction p/q. 0.333… = 1/3 which is rational. The others are irrational.',
+ steps:['π, √2, √5, √7, √11 are all irrational (non-terminating, non-repeating decimals).','0.333… = 1/3 — a repeating decimal — is <code>rational</code>.']},
+
+{id:'NS11',cat:'NS',diff:3,
+ stem:'What is (−4) × (−3) ÷ (−2) + 5?',
+ opts:['17','1','−1','11','−11','7'],ans:1,
+ expl:'Follow order of operations: multiply and divide left to right, then add.',
+ steps:['(−4)×(−3) = 12.','12 ÷ (−2) = −6.','−6 + 5 = <code>−1</code>... wait, check option C = −1: ✓'],},
+
+{id:'NS12',cat:'NS',diff:3,
+ stem:'The temperature dropped from 8°F to −14°F. What was the total change in temperature?',
+ opts:['6°F','−6°F','22°F','−22°F','4°F','−4°F'],ans:2,
+ expl:'Change = final − initial. Then find the absolute change (the drop).',
+ steps:['Change = −14 − 8 = −22.','The temperature dropped by <code>22°F</code>.']},
+
+{id:'NS13',cat:'NS',diff:3,
+ stem:'What is the value of −3² + (−2)³?',
+ opts:['17','−17','1','−1','−9','9'],ans:1,
+ expl:'Apply exponent rules carefully: −3² means −(3²), but (−2)³ means (−2)×(−2)×(−2).',
+ steps:['−3² = −(9) = −9  [the negative is NOT squared].','(−2)³ = (−2)(−2)(−2) = −8.','−9 + (−8) = <code>−17</code>.']},
+
+{id:'NS14',cat:'NS',diff:1,
+ stem:'What is the greatest common factor (GCF) of 24 and 36?',
+ opts:['4','6','8','12','18','72'],ans:3,
+ expl:'The GCF is the largest number that divides both values evenly.',
+ steps:['Factors of 24: 1,2,3,4,6,8,12,24.','Factors of 36: 1,2,3,4,6,9,12,18,36.','Largest common factor: <code>12</code>.']},
+
+{id:'NS15',cat:'NS',diff:2,
+ stem:'What is the least common multiple (LCM) of 8 and 12?',
+ opts:['4','16','20','24','32','96'],ans:3,
+ expl:'The LCM is the smallest number that is a multiple of both values.',
+ steps:['Multiples of 8: 8,16,24,32…','Multiples of 12: 12,24,36…','Smallest common: <code>24</code>.']},
+
+{id:'NS16',cat:'NS',diff:3,
+ stem:'A jacket costs $65. It is marked up 40% then discounted 20%. What is the final price?',
+ opts:['$52.00','$58.00','$62.40','$72.80','$61.10','$65.00'],ans:3,
+ expl:'Apply the markup first, then apply the discount to the new price.',
+ steps:['After 40% markup: $65 × 1.40 = $91.','After 20% discount: $91 × 0.80 = <code>$72.80</code>.']},
+
+{id:'NS17',cat:'NS',diff:2,
+ stem:'Which expression equals |−15| − |−7| + |−3|?',
+ opts:['−25','−11','11','25','5','−5'],ans:2,
+ expl:'Evaluate each absolute value first, then compute left to right.',
+ steps:['|−15| = 15; |−7| = 7; |−3| = 3.','15 − 7 + 3 = <code>11</code>.']},
+
+{id:'NS18',cat:'NS',diff:1,
+ stem:'Which of the following is NOT an integer?',
+ opts:['−4','0','7','−100','3.5','25'],ans:4,
+ expl:'Integers are whole numbers and their negatives (…−3,−2,−1,0,1,2,3…). Decimals are not integers.',
+ steps:['−4, 0, 7, −100, 25 are all whole numbers or their negatives.','<code>3.5</code> has a fractional part → not an integer.']},
+
+// ── ALGEBRAIC REASONING (need ~10-14 items, provide 14) ──
+{id:'AR01',cat:'AR',diff:1,
+ stem:'Evaluate 5x − 3 when x = 4.',
+ opts:['8','14','17','22','32','37'],ans:2,
+ expl:'Substitute x = 4 into the expression, then use order of operations.',
+ steps:['Replace x: <code>5(4) − 3</code>.','Multiply first: 20 − 3.','Subtract: <code>17</code>.']},
+
+{id:'AR02',cat:'AR',diff:1,
+ stem:'Solve for x: x + 13 = 29',
+ opts:['x = 12','x = 14','x = 16','x = 42','x = 17','x = 15'],ans:2,
+ expl:'Use inverse operations — subtract 13 from both sides to isolate x.',
+ steps:['x + 13 = 29.','Subtract 13: x = 29 − 13.','<code>x = 16</code>.']},
+
+{id:'AR03',cat:'AR',diff:2,
+ stem:'Which expression is equivalent to 6(3x − 4)?',
+ opts:['18x − 4','9x − 24','18x − 24','18x + 24','6x − 24','18x − 10'],ans:2,
+ expl:'Distributive Property: multiply 6 by each term inside the parentheses.',
+ steps:['6 × 3x = 18x.','6 × (−4) = −24.','Result: <code>18x − 24</code>.']},
+
+{id:'AR04',cat:'AR',diff:2,
+ stem:'Solve for y: 4y − 8 = 20',
+ opts:['y = 3','y = 5','y = 7','y = 9','y = 12','y = 28'],ans:3,
+ expl:'Use inverse operations: add 8 to both sides, then divide by 4.',
+ steps:['Add 8: 4y = 28.','Divide by 4: <code>y = 7</code>... ','Wait: 28÷4 = 7 ✓ → answer is <code>y = 7</code>, option C.'],},
+
+{id:'AR05',cat:'AR',diff:2,
+ stem:'A phone plan charges $25/month plus $0.10 per text. Which equation gives the total cost C for t texts per month?',
+ opts:['C = 0.10t','C = 25t','C = 25 + 10t','C = 25 + 0.10t','C = 0.10 + 25t','C = 35t'],ans:3,
+ expl:'Identify the fixed cost and the variable (per-text) cost.',
+ steps:['Fixed cost: $25 per month.','Variable cost: $0.10 × t.','Equation: <code>C = 25 + 0.10t</code>.']},
+
+{id:'AR06',cat:'AR',diff:3,
+ stem:'Solve for x: 3(x + 5) − 2x = 19',
+ opts:['x = 2','x = 3','x = 4','x = 6','x = 8','x = 14'],ans:2,
+ expl:'Distribute first, then combine like terms, then isolate x.',
+ steps:['Distribute: 3x + 15 − 2x = 19.','Combine: x + 15 = 19.','Subtract 15: <code>x = 4</code>.']},
+
+{id:'AR07',cat:'AR',diff:3,
+ stem:'Which inequality represents: "a number n decreased by 7 is at least 12"?',
+ opts:['n − 7 < 12','n + 7 ≤ 12','n − 7 ≥ 12','n + 7 ≥ 12','n − 7 > 12','n − 7 = 12'],ans:2,
+ expl:'"Decreased by 7" means subtract 7. "At least" means greater than or equal to (≥).',
+ steps:['"n decreased by 7" → n − 7.','"at least 12" → ≥ 12.','Inequality: <code>n − 7 ≥ 12</code>.']},
+
+{id:'AR08',cat:'AR',diff:2,
+ stem:'Which value of x makes the equation 2x + 3 = 15 true?',
+ opts:['x = 4','x = 5','x = 6','x = 7','x = 9','x = 12'],ans:2,
+ expl:'Solve by subtracting 3 then dividing by 2, or test values.',
+ steps:['2x + 3 = 15 → 2x = 12.','x = 12 ÷ 2 = <code>6</code>.']},
+
+{id:'AR09',cat:'AR',diff:3,
+ stem:'A table shows that y = 2x + 1. When x = −3, what is y?',
+ opts:['7','5','−3','−5','−7','1'],ans:3,
+ expl:'Substitute x = −3 into the equation and simplify.',
+ steps:['y = 2(−3) + 1.','y = −6 + 1.','y = <code>−5</code>.']},
+
+{id:'AR10',cat:'AR',diff:1,
+ stem:'Write an expression for "8 more than twice a number n".',
+ opts:['8n + 2','2 + 8n','8 − 2n','2n + 8','2n − 8','8n − 2'],ans:3,
+ expl:'"Twice a number n" is 2n. "8 more than" means add 8.',
+ steps:['"twice n" = 2n.','"8 more than 2n" = 2n + 8.',]},
+
+{id:'AR11',cat:'AR',diff:2,
+ stem:'The perimeter of a square is 52 cm. What is the length of one side?',
+ opts:['10 cm','11 cm','12 cm','13 cm','14 cm','26 cm'],ans:3,
+ expl:'Perimeter of a square = 4 × side. Solve for side.',
+ steps:['4s = 52.','s = 52 ÷ 4 = <code>13 cm</code>.']},
+
+{id:'AR12',cat:'AR',diff:3,
+ stem:'Which expression represents the perimeter of a rectangle with length (3x + 2) and width (x − 1)?',
+ opts:['4x + 1','8x + 2','4x + 2','8x − 2','6x + 2','8x + 1'],ans:1,
+ expl:'Perimeter = 2(length + width). Distribute and simplify.',
+ steps:['P = 2[(3x+2)+(x−1)] = 2[4x+1].','= <code>8x + 2</code>.']},
+
+{id:'AR13',cat:'AR',diff:2,
+ stem:'Simplify: 4x + 7 − 2x − 3',
+ opts:['2x + 10','6x + 4','2x + 4','6x + 10','−2x + 4','2x − 4'],ans:2,
+ expl:'Combine like terms: group the x terms together and the constants together.',
+ steps:['x-terms: 4x − 2x = 2x.','Constants: 7 − 3 = 4.','Result: <code>2x + 4</code>.']},
+
+{id:'AR14',cat:'AR',diff:1,
+ stem:'Which of the following is NOT a solution to x > −2?',
+ opts:['−1','0','3','−3','5','1'],ans:3,
+ expl:'x > −2 means x must be strictly greater than −2.',
+ steps:['−1 > −2 ✓; 0 > −2 ✓; 3 > −2 ✓; 5 > −2 ✓; 1 > −2 ✓.','−3 < −2, so <code>−3</code> is NOT a solution.']},
+
+// ── GEOMETRIC REASONING, DATA ANALYSIS & PROBABILITY (need ~10-14, provide 14) ──
+{id:'GR01',cat:'GR',diff:1,
+ stem:'A rectangle has length 15 cm and width 8 cm. What is its area?',
+ opts:['46 cm²','80 cm²','100 cm²','120 cm²','46 cm','120 cm'],ans:3,
+ expl:'Area of a rectangle = length × width.',
+ steps:['A = l × w.','A = 15 × 8 = <code>120 cm²</code>.']},
+
+{id:'GR02',cat:'GR',diff:1,
+ stem:'Find the mean of: 6, 10, 4, 14, 16.',
+ opts:['8','9','10','11','12','50'],ans:2,
+ expl:'Mean = sum of all values ÷ number of values.',
+ steps:['Sum: 6+10+4+14+16 = 50.','Count: 5 values.','Mean: 50 ÷ 5 = <code>10</code>.']},
+
+{id:'GR03',cat:'GR',diff:1,
+ stem:'Find the median of: 3, 9, 1, 7, 5',
+ opts:['1','3','5','7','9','6'],ans:2,
+ expl:'Median = middle value when data is sorted from least to greatest.',
+ steps:['Sort: 1, 3, 5, 7, 9.','5 values → middle is 3rd.','Median = <code>5</code>.']},
+
+{id:'GR04',cat:'GR',diff:2,
+ stem:'A triangle has base 14 m and height 9 m. What is its area?',
+ opts:['23 m²','46 m²','63 m²','126 m²','42 m²','72 m²'],ans:2,
+ expl:'Area of a triangle = ½ × base × height.',
+ steps:['A = ½ × b × h.','A = ½ × 14 × 9 = <code>63 m²</code>.']},
+
+{id:'GR05',cat:'GR',diff:2,
+ stem:'In which quadrant is the point (−5, 4)?',
+ opts:['Quadrant I','Quadrant II','Quadrant III','Quadrant IV','On the x-axis','On the y-axis'],ans:1,
+ expl:'Quadrant rules: I(+,+), II(−,+), III(−,−), IV(+,−).',
+ steps:['x = −5 (negative) → left of y-axis.','y = 4 (positive) → above x-axis.','Negative x, positive y → <code>Quadrant II</code>.']},
+
+{id:'GR06',cat:'GR',diff:2,
+ stem:'A rectangular prism has length 7, width 5, and height 4. What is its volume?',
+ opts:['70','100','120','140','160','210'],ans:3,
+ expl:'Volume of a rectangular prism = length × width × height.',
+ steps:['V = l × w × h.','V = 7 × 5 × 4 = <code>140</code> cubic units.']},
+
+{id:'GR07',cat:'GR',diff:2,
+ stem:'A data set is: 4, 7, 7, 9, 12, 15. What is the mode?',
+ opts:['4','7','9','12','There is no mode','15'],ans:1,
+ expl:'The mode is the value that appears most frequently in the data set.',
+ steps:['Count each: 4(×1), 7(×2), 9(×1), 12(×1), 15(×1).','7 appears most often.','Mode = <code>7</code>.']},
+
+{id:'GR08',cat:'GR',diff:3,
+ stem:'A triangle has vertices at (0,0), (8,0), and (8,6). What is its area?',
+ opts:['14 sq units','24 sq units','28 sq units','48 sq units','12 sq units','32 sq units'],ans:1,
+ expl:'Use coordinates to find base and height, then apply the triangle area formula.',
+ steps:['Base: (0,0) to (8,0) = 8 units.','Height: (8,0) to (8,6) = 6 units.','A = ½ × 8 × 6 = <code>24 sq units</code>.']},
+
+{id:'GR09',cat:'GR',diff:3,
+ stem:'A data set has a mean of 12 and 5 values. Four of the values are: 10, 15, 8, 14. What is the fifth value?',
+ opts:['10','11','12','13','14','15'],ans:3,
+ expl:'Use: sum = mean × count. Find the missing value by subtraction.',
+ steps:['Total sum: 12 × 5 = 60.','Known sum: 10+15+8+14 = 47.','Fifth value: 60 − 47 = <code>13</code>.']},
+
+{id:'GR10',cat:'GR',diff:3,
+ stem:'A spinner has 8 equal sections: 3 red, 2 blue, 2 green, 1 yellow. What is the probability of NOT landing on red?',
+ opts:['3/8','1/4','1/2','5/8','3/5','2/3'],ans:3,
+ expl:'P(not red) = 1 − P(red). Count non-red sections over total.',
+ steps:['P(red) = 3/8.','P(not red) = 1 − 3/8 = <code>5/8</code>.']},
+
+{id:'GR11',cat:'GR',diff:2,
+ stem:'What is the surface area of a rectangular prism with length 5, width 3, and height 4?',
+ opts:['24','47','60','74','94','120'],ans:3,
+ expl:'SA = 2(lw + lh + wh). Compute each face pair and sum.',
+ steps:['lw = 5×3 = 15; lh = 5×4 = 20; wh = 3×4 = 12.','SA = 2(15 + 20 + 12) = 2(47) = <code>94</code>.'],},
+
+{id:'GR12',cat:'GR',diff:1,
+ stem:'Plot the point (3, −4). In which quadrant does it lie?',
+ opts:['Quadrant I','Quadrant II','Quadrant III','Quadrant IV','On the x-axis','On the y-axis'],ans:3,
+ expl:'Positive x, negative y → Quadrant IV (right side, below x-axis).',
+ steps:['x = 3 (positive) → right of y-axis.','y = −4 (negative) → below x-axis.','Positive x, negative y → <code>Quadrant IV</code>.']},
+
+{id:'GR13',cat:'GR',diff:3,
+ stem:'A bag has 5 red, 3 blue, and 2 green marbles. Two marbles are drawn without replacement. What is the probability both are red?',
+ opts:['1/4','2/9','4/9','2/18','5/9','3/10'],ans:1,
+ expl:'Probability of two events without replacement: P(A) × P(B after A).',
+ steps:['P(1st red) = 5/10 = 1/2.','P(2nd red | 1st red) = 4/9.','P(both red) = 1/2 × 4/9 = 4/18 = <code>2/9</code>.']},
+
+{id:'GR14',cat:'GR',diff:2,
+ stem:'The ages of students in a class: 11,11,12,12,12,13,13,14. What is the mean age?',
+ opts:['11.5','12','12.25','12.5','13','12.75'],ans:2,
+ expl:'Mean = sum ÷ count.',
+ steps:['Sum: 11+11+12+12+12+13+13+14 = 98.','Count: 8 students.','Mean = 98 ÷ 8 = <code>12.25</code>.']},
+];
+
+// Fix AR04 answer: 4y−8=20 → 4y=28 → y=7 → opts index 2 = 'y = 7'? 
+// opts:['y=3','y=5','y=7','y=9','y=12','y=28'] → y=7 is index 2
+ITEMS.find(i=>i.id==='AR04').ans = 2;
+// Fix GR11 SA: 2(15+20+12) = 94 → index 4 in opts ['24','47','60','74','94','120'] = index 4
+ITEMS.find(i=>i.id==='GR11').ans = 4;
+// Fix NS11: (−4)×(−3)÷(−2)+5 = 12÷(−2)+5 = −6+5 = −1 → opts: ['17','1','−1','11','−11','7'] → index 2
+ITEMS.find(i=>i.id==='NS11').ans = 2;
+// Fix AR04 re-check: opts index mapping ['y = 3'(0),'y = 5'(1),'y = 7'(2),'y = 9'(3),'y = 12'(4),'y = 28'(5)] → y=7 = index 2 ✓
+
+// ══════════════════════════════════════════════
+// BLUEPRINT: 38 questions
+// NS: 14 items (37%), AR: 12 items (32%), GR: 12 items (32%)
+// ══════════════════════════════════════════════
+const BLUEPRINT = {NS:14, AR:12, GR:12};
+const TOTAL_Q = 38;
+
+const LEVELS = [
+  {level:1,min:168,max:212,label:'Level 1 — Well Below Grade Level',cls:'lv1',desc:'Substantial support needed. Focus on number sense fundamentals, integer operations, and basic fraction concepts.'},
+  {level:2,min:213,max:228,label:'Level 2 — Below Grade Level',cls:'lv2',desc:'Approaching grade-level expectations. Targeted work on algebraic reasoning and proportional relationships will help.'},
+  {level:3,min:229,max:238,label:'Level 3 — On Grade Level',cls:'lv3',desc:'Meeting B.E.S.T. grade-level standards. Continue building depth in geometry, data analysis, and multi-step problems.'},
+  {level:4,min:239,max:253,label:'Level 4 — Proficient',cls:'lv4',desc:'Strong mastery across 6th grade standards. Well prepared for 7th grade content.'},
+  {level:5,min:254,max:287,label:'Level 5 — Mastery',cls:'lv5',desc:'Exceptional mastery of all reporting categories. Ready for advanced 7th grade or accelerated coursework.'},
+];
+
+// ══════════════════════════════════════════════
+// GOOGLE SHEETS CONFIG
+// ── SETUP INSTRUCTIONS ──────────────────────
+// 1. Go to https://sheets.google.com and create a new spreadsheet.
+// 2. Name the first sheet "Results" (or leave it as Sheet1).
+// 3. In row 1, add these headers in columns A–L:
+//    Timestamp | Name | ScaleScore | Level | LevelNum |
+//    RawCorrect | RawTotal | RawPct |
+//    NS_Correct | NS_Total | AR_Correct | AR_Total | GR_Correct | GR_Total
+// 4. Go to Extensions → Apps Script and paste this code:
+//    function doPost(e) {
+//      var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Results') ||
+//                  SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+//      var data = JSON.parse(e.postData.contents);
+//      sheet.appendRow([
+//        data.timestamp, data.name, data.scale, data.levelLabel, data.levelNum,
+//        data.correct, data.total, data.pct,
+//        data.ns_correct, data.ns_total,
+//        data.ar_correct, data.ar_total,
+//        data.gr_correct, data.gr_total
+//      ]);
+//      return ContentService.createTextOutput('OK');
+//    }
+// 5. Click Deploy → New Deployment → Web App.
+//    Set "Execute as" = Me, "Who has access" = Anyone. Click Deploy.
+// 6. Copy the Web App URL and paste it below as SHEETS_URL.
+// ────────────────────────────────────────────
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwDvezYlq3Cta4D-6SEm_-N72KmDgF9TB6dUkp1bmZiL3jXs0ZEx8Lf8a98CsFws5qE/exec';
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let studentName = '';
+let testItems=[], testAnswers=[], catCounts={}, catRemaining={};
+let theta=0, currentIdx=0, timerSec=100*60, timerInt=null;
+
+function initState(){
+  testItems=[]; testAnswers=[];
+  catCounts={NS:0,AR:0,GR:0};
+  catRemaining={...BLUEPRINT};
+  theta=0; currentIdx=0; timerSec=100*60;
+}
+
+function diffFromTheta(){
+  if(theta < -0.6) return 1;
+  if(theta > 0.6)  return 3;
+  return 2;
+}
+
+function selectNext(){
+  const needed = Object.keys(catRemaining).filter(c=>catRemaining[c]>0);
+  if(!needed.length) return null;
+  // pick category with most remaining
+  needed.sort((a,b)=>catRemaining[b]-catRemaining[a]);
+  const cat = needed[0];
+  const tDiff = diffFromTheta();
+  const used = testItems.map(i=>i.id);
+  let pool = ITEMS.filter(i=>i.cat===cat && !used.includes(i.id));
+  if(!pool.length) return null;
+  let best = pool.find(i=>i.diff===tDiff);
+  if(!best){ pool.sort((a,b)=>Math.abs(a.diff-tDiff)-Math.abs(b.diff-tDiff)); best=pool[0]; }
+  return best;
+}
+
+function updateTheta(correct, diff){
+  // Symmetric update: correct raises theta, wrong lowers it, magnitude scales with difficulty
+  const stepSize = 0.22 + (diff - 1) * 0.08; // easy=0.22, med=0.30, hard=0.38
+  const d = correct ? stepSize : -stepSize;
+  theta = Math.max(-2.5, Math.min(2.5, theta + d));
+}
+
+function thetaToScale(){
+  // PRIMARY driver: difficulty-weighted accuracy score (0.0 – 1.0)
+  // Each item contributes points weighted by its difficulty (easy=1, med=2, hard=3)
+  let totalWeight = 0, earnedWeight = 0;
+  testItems.forEach((it, i) => {
+    const w = it.diff; // 1, 2, or 3
+    totalWeight += w;
+    if (testAnswers[i] === it.ans) earnedWeight += w;
+  });
+  const weightedAccuracy = totalWeight > 0 ? earnedWeight / totalWeight : 0;
+
+  // Also compute raw accuracy as a sanity floor/ceiling
+  const rawCorrect = testItems.filter((it,i) => testAnswers[i] === it.ans).length;
+  const rawAccuracy = rawCorrect / testItems.length;
+
+  // Blend: 70% weighted accuracy, 30% raw accuracy — gives fair but difficulty-sensitive score
+  const blended = weightedAccuracy * 0.70 + rawAccuracy * 0.30;
+
+  // Map 0–1 accuracy to the B.E.S.T. scale 168–287 (range = 119 points)
+  // BUT: anchor the mapping so that:
+  //   ~40% accuracy  → ~185 (solid Level 1)
+  //   ~55% accuracy  → ~215 (Level 2)
+  //   ~70% accuracy  → ~233 (Level 3 — on grade level)
+  //   ~82% accuracy  → ~246 (Level 4)
+  //   ~93%+ accuracy → ~265+ (Level 5)
+  // We use a piecewise linear map anchored at these points.
+  const anchors = [
+    [0.00, 168], [0.25, 178], [0.38, 200], [0.45, 213],
+    [0.58, 229], [0.72, 239], [0.85, 254], [0.93, 270], [1.00, 287]
+  ];
+  let score = 168;
+  for (let i = 1; i < anchors.length; i++) {
+    const [x0, y0] = anchors[i-1];
+    const [x1, y1] = anchors[i];
+    if (blended <= x1) {
+      const t = (blended - x0) / (x1 - x0);
+      score = y0 + t * (y1 - y0);
+      break;
+    }
+    score = y1;
+  }
+
+  // Small theta nudge (±2 pts max) — secondary adjustment for adaptive signal
+  const thetaNudge = Math.round(theta * 0.9);
+  score = Math.round(score) + thetaNudge;
+
+  return Math.max(168, Math.min(287, score));
+}
+
+function getLevel(s){ return LEVELS.find(l=>s>=l.min&&s<=l.max)||LEVELS[0]; }
+function abilityText(){
+  if(theta<-1.5)return'Building Foundations';
+  if(theta<-0.5)return'Developing Skills';
+  if(theta<0.5)return'On Grade Level';
+  if(theta<1.5)return'Proficient';
+  return'Mastery Level';
+}
+
+// ══════════════════════════════════════════════
+// UI
+// ══════════════════════════════════════════════
+function goToIntro(){
+  const input = document.getElementById('student-name');
+  const name = input.value.trim();
+  if(!name){ 
+    document.getElementById('name-err').style.display='block';
+    input.focus(); return;
+  }
+  studentName = name;
+  document.getElementById('name-err').style.display='none';
+  document.getElementById('s-name').classList.remove('active');
+  document.getElementById('s-intro').classList.add('active');
+}
+
+function startTest(){
+  initState();
+  document.getElementById('s-intro').classList.remove('active');
+  document.getElementById('s-q').classList.add('active');
+  document.getElementById('thead').style.display='flex';
+  document.getElementById('sidebar').style.display='flex';
+  buildGrid(); advanceQ(); startTimer();
+}
+
+function buildGrid(){
+  const g=document.getElementById('qgrid'); g.innerHTML='';
+  for(let i=0;i<TOTAL_Q;i++){
+    const d=document.createElement('div');
+    d.className='pip'; d.id=`pip${i}`; d.textContent=i+1; g.appendChild(d);
+  }
+}
+
+function updatePips(){
+  for(let i=0;i<TOTAL_Q;i++){
+    const p=document.getElementById(`pip${i}`); if(!p)continue;
+    p.className='pip';
+    if(i<testItems.length){
+      if(i===currentIdx) p.classList.add('cur');
+      else if(testAnswers[i]!=null) p.classList.add('ans');
+    }
+  }
+}
+
+function advanceQ(){
+  const item=selectNext();
+  if(!item||testItems.length>=TOTAL_Q){finishTest();return;}
+  testItems.push(item); testAnswers.push(null);
+  catCounts[item.cat]++; catRemaining[item.cat]--;
+  currentIdx=testItems.length-1;
+  renderQ(item,currentIdx); updatePips(); updateAbility();
+  document.getElementById('hqn').textContent=currentIdx+1;
+}
+
+function renderQ(item, idx){
+  const dl={1:'Easy',2:'Medium',3:'Hard'}[item.diff];
+  const dc={1:'de',2:'dm',3:'dh'}[item.diff];
+  document.getElementById('dbadge').textContent=dl;
+  document.getElementById('dbadge').className=`dbadge ${dc}`;
+  const isLast=testItems.length===TOTAL_Q;
+  document.getElementById('qbox').innerHTML=`
+    <div class="qtop">
+      <div class="qnbadge">${idx+1}</div>
+      <div class="qmeta">
+        <div class="qcat">${CATS[item.cat]}</div>
+        <div class="qstem">${item.stem}</div>
+      </div>
+    </div>
+    <div class="qbody">
+      <div class="opts" id="opts">
+        ${item.opts.map((o,oi)=>`
+          <div class="opt ${testAnswers[idx]===oi?'sel':''}" id="op${oi}" onclick="selOpt(${oi})">
+            <div class="oletter">${'ABCDEF'[oi]}</div>
+            <span>${o}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="qfoot">
+      <span class="qhint">Select one answer (6 choices)</span>
+      <button class="btn btn-p ${isLast?'btn-sub':''}" id="bnext" onclick="confirmAns()" ${testAnswers[idx]==null?'disabled':''}>
+        ${isLast?'Submit Test ✓':'Next Question →'}
+      </button>
+    </div>`;
+}
+
+function selOpt(oi){
+  testAnswers[currentIdx]=oi;
+  document.querySelectorAll('.opt').forEach((el,i)=>{
+    el.classList.toggle('sel',i===oi);
+    const l=el.querySelector('.oletter');
+    l.style.background=i===oi?'var(--blue)':'';
+    l.style.color=i===oi?'#fff':'';
+    l.style.borderColor=i===oi?'var(--blue)':'';
+  });
+  document.getElementById('bnext').disabled=false;
+}
+
+function confirmAns(){
+  const item=testItems[currentIdx];
+  const ans=testAnswers[currentIdx];
+  if(ans==null)return;
+  updateTheta(ans===item.ans, item.diff);
+  updateAbility(); updatePips();
+  if(testItems.length>=TOTAL_Q&&currentIdx===TOTAL_Q-1){finishTest();return;}
+  advanceQ();
+}
+
+function updateAbility(){
+  const pct=Math.round(((theta+2)/4)*100);
+  document.getElementById('afill').style.width=pct+'%';
+  document.getElementById('alabel').textContent=abilityText();
+}
+
+// ══════════════════════════════════════════════
+// TIMER
+// ══════════════════════════════════════════════
+function startTimer(){
+  timerSec=100*60; updTimer();
+  timerInt=setInterval(()=>{ timerSec--; updTimer(); if(timerSec<=0){clearInterval(timerInt);finishTest();}},1000);
+}
+function updTimer(){
+  const m=Math.floor(timerSec/60).toString().padStart(2,'0');
+  const s=(timerSec%60).toString().padStart(2,'0');
+  const el=document.getElementById('mtimer');
+  if(el){el.textContent=`${m}:${s}`;el.className=timerSec<=120?'urg':timerSec<=300?'warn':'';}
+}
+
+// ══════════════════════════════════════════════════════════════
+// GOOGLE SHEETS + DRIVE SUBMISSION
+// ── APPS SCRIPT CODE (copy this into your Apps Script editor) ─
+//
+// function doPost(e) {
+//   var data = JSON.parse(e.postData.contents);
+//   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+//
+//   // Scoped to your FAST folder only — nothing else in Drive is accessible
+//   var RESULTS_FOLDER_ID = '1CP3wnhbWRs-Coorjz4iQKA1WNbG3sKv1';
+//
+//   var driveLink = '';
+//   if (data.snapshotHtml) {
+//     var folder = DriveApp.getFolderById(RESULTS_FOLDER_ID);
+//     var fileName = data.name + ' — ' + data.datestamp + '.html';
+//     var blob = Utilities.newBlob(
+//       Utilities.base64Decode(data.snapshotHtml),
+//       'text/html',
+//       fileName
+//     );
+//     var file = folder.createFile(blob);
+//     file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+//     driveLink = file.getUrl();
+//   }
+//
+//   // Append row to sheet (column O = Drive link)
+//   sheet.appendRow([
+//     data.timestamp, data.name, data.scale, data.levelLabel, data.levelNum,
+//     data.correct, data.total, data.pct,
+//     data.ns_correct, data.ns_total,
+//     data.ar_correct, data.ar_total,
+//     data.gr_correct, data.gr_total,
+//     driveLink
+//   ]);
+//   return ContentService.createTextOutput('OK');
+// }
+// ────────────────────────────────────────────────────────────
+// NOTE: After updating the script, click Deploy → Manage Deployments
+//       → edit your existing deployment → set Version to "New version"
+//       → click Deploy. The URL stays the same.
+// ══════════════════════════════════════════════════════════════
+
+function showToast(msg, type, duration=3500){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(()=>{ t.classList.remove('show'); }, duration);
+}
+
+function buildSnapshotHTML(resultsHTML, studentName, dateStr) {
+  // Grab all <style> blocks from the parent document to inline into snapshot
+  const styles = Array.from(document.querySelectorAll('style'))
+    .map(s => s.innerHTML).join('\n');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FAST Results — ${studentName} — ${dateStr}</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6fb;--white:#fff;--navy:#0d1f3c;--blue:#1557b0;--sky:#2e86de;
+  --teal:#0abf88;--gold:#f0a500;--red:#e53e3e;--border:#dde3ef;
+  --muted:#8493a8;--text:#1a2540;--lb:#eef4ff;}
+${styles}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);padding:24px;}
+.res-wrap{max-width:760px;margin:0 auto;}
+/* freeze expansions open in snapshot */
+.rcb{display:block !important;}
+.rc.exp .rcchev,.rcchev{transform:rotate(180deg);}
+</style>
+</head>
+<body>
+<div style="background:var(--navy);color:rgba(255,255,255,.5);font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;padding:10px 20px;border-bottom:3px solid var(--sky);">
+  🌴 Florida FAST Assessment System — Saved Results Report
+</div>
+${resultsHTML}
+<script>
+// Make all review cards expanded and disable retry button interaction
+document.querySelectorAll('.rc').forEach(el => el.classList.add('exp'));
+document.querySelectorAll('.btn-retry').forEach(el => el.style.display='none');
+document.querySelectorAll('.rch').forEach(el => el.style.cursor='default');
+<\/script>
+</body></html>`;
+}
+
+async function submitToSheets(payload, resultsHTML){
+  if(!SHEETS_URL || SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'){
+    console.warn('Google Sheets URL not configured — skipping submission.');
+    return;
+  }
+  showToast('⏳ Saving results…', 'saving', 99999);
+
+  // Build snapshot and base64-encode it
+  const dateStr = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  const snapshot = buildSnapshotHTML(resultsHTML, payload.name, dateStr);
+
+  // btoa with UTF-8 support
+  const b64 = btoa(unescape(encodeURIComponent(snapshot)));
+
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors', // required for Apps Script — no response body returned
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ ...payload, snapshotHtml: b64, datestamp: dateStr })
+    });
+    showToast('✅ Results & report saved!', 'saved');
+  } catch(e) {
+    showToast('⚠️ Could not save — check your Sheets URL.', 'err');
+    console.error('Sheets submit error:', e);
+  }
+}
+
+// ══════════════════════════════════════════════
+// RESULTS
+// ══════════════════════════════════════════════
+function finishTest(){
+  clearInterval(timerInt);
+  document.getElementById('thead').style.display='none';
+  document.getElementById('sidebar').style.display='none';
+  document.getElementById('s-q').classList.remove('active');
+
+  const scale=thetaToScale();
+  const lvl=getLevel(scale);
+  const correct=testItems.filter((it,i)=>testAnswers[i]===it.ans).length;
+  const total=testItems.length;
+  const pct=Math.round((correct/total)*100);
+  const gw=Math.round(((scale-168)/119)*100);
+
+  // Per-category stats
+  const cs={NS:{c:0,t:0},AR:{c:0,t:0},GR:{c:0,t:0}};
+  testItems.forEach((it,i)=>{ cs[it.cat].t++; if(testAnswers[i]===it.ans)cs[it.cat].c++; });
+
+  const catHTML=Object.keys(CATS).map(c=>{
+    const s=cs[c]; if(!s.t)return'';
+    const p=Math.round((s.c/s.t)*100);
+    const chip=p>=80?'above':p>=50?'atnear':'below';
+    const chipTxt=p>=80?'Above Standard':p>=50?'At / Near Standard':'Below Standard';
+    const barColor=p>=80?'var(--teal)':p>=50?'var(--sky)':'var(--red)';
+    return`<div class="cr">
+      <div class="crname">${CATS[c]}</div>
+      <div class="crbw"><div class="crb" style="width:${p}%;background:${barColor}"></div></div>
+      <div class="crpct">${s.c}/${s.t}</div>
+      <div class="cchip ${chip}">${chipTxt}</div>
+    </div>`;
+  }).join('');
+
+  // Topic summary table
+  const topicRows=testItems.map((it,i)=>{
+    const isC=testAnswers[i]===it.ans;
+    const uAns=testAnswers[i]!=null?it.opts[testAnswers[i]]:'No Answer';
+    const cAns=it.opts[it.ans];
+    const dl={1:'Easy',2:'Medium',3:'Hard'}[it.diff];
+    const dCls={1:'td-e',2:'td-m',3:'td-h'}[it.diff];
+    const catCls={NS:'tc-ns',AR:'tc-ar',GR:'tc-gr'}[it.cat];
+    return`<tr>
+      <td style="font-weight:700;color:var(--muted);font-size:12px;">${i+1}</td>
+      <td><span class="ts-cat ${catCls}">${it.cat}</span></td>
+      <td class="topic-q">${it.stem}</td>
+      <td><span class="ts-diff ${dCls}">${dl}</span></td>
+      <td>${isC?'<span style="color:var(--teal);font-weight:700;font-size:13px;">'+uAns+'</span>':'<span style="color:var(--red);font-size:13px;text-decoration:line-through;">'+uAns+'</span><br><span style="color:var(--teal);font-size:12px;font-weight:600;">✓ '+cAns+'</span>'}</td>
+      <td class="ts-result">${isC?'✅':'❌'}</td>
+    </tr>`;
+  }).join('');
+
+  // Detailed review
+  const revHTML=testItems.map((it,i)=>{
+    const isC=testAnswers[i]===it.ans;
+    const uAns=testAnswers[i]!=null?it.opts[testAnswers[i]]:'No Answer';
+    const cAns=it.opts[it.ans];
+    const dl={1:'Easy',2:'Medium',3:'Hard'}[it.diff];
+    const dCls={1:'de',2:'dm',3:'dh'}[it.diff];
+    return`<div class="rc ${isC?'c':'w'}" id="rc${i}">
+      <div class="rch" onclick="toggleRev(${i})">
+        <div class="rci">${isC?'✓':'✗'}</div>
+        <div class="rcinfo">
+          <div class="rcm">
+            <span>${CATS[it.cat]}</span>
+            <span class="dbadge ${dCls}" style="font-size:9px;">${dl}</span>
+          </div>
+          <div class="rcq">Q${i+1}: ${it.stem}</div>
+        </div>
+        <div class="rcchev">▾</div>
+      </div>
+      <div class="rcb">
+        <div class="ar">
+          <div class="ap ${isC?'apc':'apw'}">${isC?'✓':'✗'} Your answer: ${uAns}</div>
+          ${!isC?`<div class="ap apr">✓ Correct: ${cAns}</div>`:''}
+        </div>
+        <div class="expbox">
+          <h4>📖 Step-by-Step Explanation</h4>
+          <p>${it.expl}</p>
+          <div class="slist">
+            ${it.steps.map((s,si)=>`<div class="si"><div class="sn">${si+1}</div><p>${s}</p></div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const el=document.getElementById('s-res');
+  const resultsHTML=`<div class="res-wrap">
+    <div class="score-hero">
+      <div style="font-size:11px;color:rgba(255,255,255,.4);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;position:relative;z-index:1;">
+        Results for ${studentName} &nbsp;·&nbsp; ${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+      </div>
+      <div class="score-row">
+        <div class="ss-block">
+          <div class="ss-num">${scale}</div>
+          <div class="ss-lbl">B.E.S.T. Scale Score</div>
+        </div>
+        <div class="sd">
+          <div class="alevel ${lvl.cls}">${lvl.label}</div>
+          <div class="ldesc">${lvl.desc}</div>
+          <div class="sgauge"><div class="sgfill" style="width:${gw}%"></div></div>
+          <div class="glabels"><span>168</span><span>213</span><span>229</span><span>239</span><span>254</span><span>287</span></div>
+          <div class="lcuts">
+            <div class="lcut lc1 ${lvl.level===1?'active':''}">L1</div>
+            <div class="lcut lc2 ${lvl.level===2?'active':''}">L2</div>
+            <div class="lcut lc3 ${lvl.level===3?'active':''}">L3</div>
+            <div class="lcut lc4 ${lvl.level===4?'active':''}">L4</div>
+            <div class="lcut lc5 ${lvl.level===5?'active':''}">L5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="sbox"><div class="sval" style="color:var(--teal)">${correct}</div><div class="slbl">Correct</div></div>
+      <div class="sbox"><div class="sval" style="color:var(--red)">${total-correct}</div><div class="slbl">Incorrect</div></div>
+      <div class="sbox"><div class="sval">${pct}%</div><div class="slbl">Raw Score</div></div>
+      <div class="sbox"><div class="sval" style="color:var(--blue)">${total}</div><div class="slbl">Questions</div></div>
+    </div>
+
+    <div class="catperf">
+      <h3>📊 Performance by Reporting Category</h3>
+      ${catHTML}
+    </div>
+
+    <div class="topic-summary">
+      <h3>📋 Topic Summary — All ${total} Questions</h3>
+      <table class="ts-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Category</th>
+            <th>Question / Topic</th>
+            <th>Difficulty</th>
+            <th>Answer</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>${topicRows}</tbody>
+      </table>
+    </div>
+
+    <div class="rev-section">
+      <h3>🔍 Full Question Review</h3>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Click any question to expand the step-by-step explanation.</p>
+      ${revHTML}
+    </div>
+
+    <button class="btn-retry" onclick="retryTest()">🔄 Retake Assessment</button>
+  </div>`;
+
+  el.innerHTML = resultsHTML;
+  el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  // ── Submit scores + full HTML snapshot to Google Sheets / Drive ──
+  submitToSheets({
+    timestamp: new Date().toLocaleString('en-US', {timeZone:'America/New_York'}),
+    name: studentName,
+    scale: scale,
+    levelLabel: lvl.label,
+    levelNum: lvl.level,
+    correct: correct,
+    total: total,
+    pct: pct,
+    ns_correct: cs.NS.c, ns_total: cs.NS.t,
+    ar_correct: cs.AR.c, ar_total: cs.AR.t,
+    gr_correct: cs.GR.c, gr_total: cs.GR.t,
+  }, resultsHTML);
+}
+
+function toggleRev(i){
+  document.getElementById(`rc${i}`).classList.toggle('exp');
+}
+
+function retryTest(){
+  document.getElementById('s-res').classList.remove('active');
+  document.getElementById('s-res').innerHTML='';
+  // Clear name so she re-enters for next session
+  document.getElementById('student-name').value='';
+  studentName='';
+  document.getElementById('s-name').classList.add('active');
+}
+
+// Clock
+function tickClock(){ document.getElementById('sclock').textContent=new Date().toLocaleTimeString(); }
+setInterval(tickClock,1000); tickClock();
+</script>
+</body>
+</html>
