@@ -636,6 +636,190 @@ const ITEMS = [
  opts:['11.5','12','12.25','12.5','13','12.75'],ans:2,
  expl:'Mean = sum ÷ count.',
  steps:['Sum: 11+11+12+12+12+13+13+14 = 98.','Count: 8 students.','Mean = 98 ÷ 8 = <code>12.25</code>.']},
+
+// ── EXPANDED HARD ITEMS: Number Sense (8 more) ──────────────────
+{id:'NS19',cat:'NS',diff:3,
+ stem:'What is the value of −2³ − (−3)² + |−10|?',
+ opts:['−10','−9','−7','1','0','10'],ans:2,
+ expl:'Evaluate each term carefully using exponent and absolute value rules.',
+ steps:['−2³ = −(2³) = −8  [the negative is not part of the base].','−(−3)² = −(9) = −9.','|−10| = 10.','−8 − 9 + 10 = <code>−7</code>.']},
+
+{id:'NS20',cat:'NS',diff:3,
+ stem:'A submarine is at −240 feet. It rises 3/8 of the way to the surface. What is its new depth?',
+ opts:['−90 ft','−150 ft','−180 ft','−200 ft','−60 ft','−210 ft'],ans:1,
+ expl:'Find 3/8 of the distance traveled, then add to the starting depth.',
+ steps:['Distance risen: 3/8 × 240 = 90 ft.','New depth: −240 + 90 = <code>−150 ft</code>.']},
+
+{id:'NS21',cat:'NS',diff:3,
+ stem:'Which expression has the greatest value? A: (−3)⁴  B: −3⁴  C: −(−3)⁴  D: 3³  E: (−2)⁵  F: −2⁵',
+ opts:['(−3)⁴','−3⁴','−(−3)⁴','3³','(−2)⁵','−2⁵'],ans:0,
+ expl:'Evaluate each: (−3)⁴=81, −3⁴=−81, −(−3)⁴=−81, 3³=27, (−2)⁵=−32, −2⁵=−32.',
+ steps:['(−3)⁴ = 81 (even power of negative = positive).','All others: −81, −81, 27, −32, −32.','Greatest = <code>(−3)⁴ = 81</code>.']},
+
+{id:'NS22',cat:'NS',diff:3,
+ stem:'The high temperature was 12°F and the low was −19°F. What is the difference between the high and low?',
+ opts:['7°F','19°F','21°F','31°F','−7°F','−31°F'],ans:3,
+ expl:'Difference = high − low = 12 − (−19). Subtracting a negative adds.',
+ steps:['12 − (−19) = 12 + 19.','= <code>31°F</code>.']},
+
+{id:'NS23',cat:'NS',diff:3,
+ stem:'A number line shows points A at −3.5 and B at 2.25. What is the distance between A and B?',
+ opts:['1.25','5.25','5.75','6.25','1.75','−5.75'],ans:2,
+ expl:'Distance = |B − A| = |2.25 − (−3.5)|.',
+ steps:['2.25 − (−3.5) = 2.25 + 3.5.','= <code>5.75</code>.']},
+
+{id:'NS24',cat:'NS',diff:3,
+ stem:'What is (−1/2)³ × (−4)²?',
+ opts:['2','−2','4','−4','1/2','−1/2'],ans:1,
+ expl:'Evaluate each power, then multiply. Track signs carefully.',
+ steps:['(−1/2)³ = −1/8  (odd power of negative = negative).','(−4)² = 16  (even power = positive).','−1/8 × 16 = −16/8 = <code>−2</code>.']},
+
+{id:'NS25',cat:'NS',diff:3,
+ stem:'After a 15% discount, a video game costs $42.50. What was the original price?',
+ opts:['$48.88','$50.00','$48.00','$57.50','$36.13','$49.25'],ans:1,
+ expl:'If the sale price is 85% of the original, divide the sale price by 0.85.',
+ steps:['Sale price = original × 0.85.','Original = $42.50 ÷ 0.85 = <code>$50.00</code>.']},
+
+{id:'NS26',cat:'NS',diff:3,
+ stem:'A fish tank loses 1/6 of its water on Monday and 2/5 of the remaining water on Tuesday. What fraction of the original water remains?',
+ opts:['13/30','7/15','1/2','11/30','1/3','17/30'],ans:2,
+ expl:'Find what remains after Monday, then multiply by what fraction survives Tuesday.',
+ steps:['After Monday: 1 − 1/6 = 5/6 remains.','Tuesday removes 2/5 of remaining, so 3/5 of 5/6 survives.','5/6 × 3/5 = 15/30 = <code>1/2</code>.']},
+
+// ── EXPANDED HARD ITEMS: Algebraic Reasoning (8 more) ───────────
+{id:'AR15',cat:'AR',diff:3,
+ stem:'Solve for x: 5(x − 3) + 2x = 3x + 1',
+ opts:['x = 2','x = 3','x = 4','x = 5','x = 6','x = 8'],ans:2,
+ expl:'Distribute, combine like terms on each side, then isolate x.',
+ steps:['Distribute: 5x − 15 + 2x = 3x + 1.','Combine: 7x − 15 = 3x + 1.','Subtract 3x: 4x − 15 = 1.','Add 15: 4x = 16 → <code>x = 4</code>.']},
+
+{id:'AR16',cat:'AR',diff:3,
+ stem:'A train travels at a constant speed. It covers 180 miles in 3 hours. Which equation gives distance d after t hours, and how far does it travel in 7 hours?',
+ opts:['d=60t; 360 mi','d=60t; 420 mi','d=3t; 21 mi','d=180t; 1260 mi','d=60t; 400 mi','d=45t; 315 mi'],ans:1,
+ expl:'Find the unit rate first, write the equation, then substitute t = 7.',
+ steps:['Speed: 180 ÷ 3 = 60 mph.','Equation: <code>d = 60t</code>.','At t = 7: d = 60 × 7 = <code>420 miles</code>.']},
+
+{id:'AR17',cat:'AR',diff:3,
+ stem:'The sum of three consecutive integers is 48. What is the largest integer?',
+ opts:['14','15','16','17','18','19'],ans:3,
+ expl:'Let the integers be n, n+1, n+2. Set up and solve the equation.',
+ steps:['n + (n+1) + (n+2) = 48.','3n + 3 = 48 → 3n = 45 → n = 15.','Largest: n + 2 = <code>17</code>.']},
+
+{id:'AR18',cat:'AR',diff:3,
+ stem:'Which value of x satisfies both x + 4 > 9 AND 2x − 3 < 11?',
+ opts:['x = 4','x = 5','x = 6','x = 7','x = 8','x = 3'],ans:2,
+ expl:'Solve each inequality, then find the value that satisfies both.',
+ steps:['x + 4 > 9 → x > 5.','2x − 3 < 11 → 2x < 14 → x < 7.','Need x > 5 AND x < 7. Only integer: <code>x = 6</code>.']},
+
+{id:'AR19',cat:'AR',diff:3,
+ stem:'Emma earns $8/hour babysitting and $12/hour tutoring. Last week she worked 10 hours total and earned $96. How many hours did she tutor?',
+ opts:['2 hours','3 hours','4 hours','5 hours','6 hours','8 hours'],ans:2,
+ expl:'Set up a system: one equation for total hours, one for total earnings.',
+ steps:['Let b = babysitting hours, t = tutoring hours.','b + t = 10  and  8b + 12t = 96.','Substitute b = 10 − t: 8(10−t) + 12t = 96.','80 − 8t + 12t = 96 → 4t = 16 → <code>t = 4 hours</code>.']},
+
+{id:'AR20',cat:'AR',diff:3,
+ stem:'A rectangle\'s length is 3 more than twice its width. Its perimeter is 54 cm. What is its width?',
+ opts:['6 cm','7 cm','8 cm','9 cm','10 cm','12 cm'],ans:2,
+ expl:'Write expressions for length and width, use the perimeter formula, solve.',
+ steps:['Let w = width; length = 2w + 3.','Perimeter: 2(w + 2w + 3) = 54.','2(3w + 3) = 54 → 6w + 6 = 54 → 6w = 48 → <code>w = 8 cm</code>.']},
+
+{id:'AR21',cat:'AR',diff:3,
+ stem:'The expression 3x² is evaluated for two values. At x = −4 it equals 48. At x = 5 it equals 75. Which statement is true?',
+ opts:['Both values are correct','Only x=−4 is correct','Only x=5 is correct','Neither is correct','Both are incorrect','Cannot be determined'],ans:0,
+ expl:'Evaluate 3x² carefully at both values — remember x² is always positive.',
+ steps:['3(−4)² = 3 × 16 = 48 ✓.','3(5)² = 3 × 25 = 75 ✓.','<code>Both values are correct</code>.']},
+
+{id:'AR22',cat:'AR',diff:3,
+ stem:'A store sells pens in packs of 4 for $3.20 and notebooks in packs of 3 for $5.10. What is the total cost of 20 pens and 9 notebooks?',
+ opts:['$16.00','$27.30','$31.30','$32.30','$28.10','$33.10'],ans:2,
+ expl:'Find the cost per pack needed, multiply by number of packs required.',
+ steps:['20 pens: 20÷4 = 5 packs × $3.20 = $16.00.','9 notebooks: 9÷3 = 3 packs × $5.10 = $15.30.','Total: $16.00 + $15.30 = <code>$31.30</code>.']},
+
+// ── EXPANDED HARD ITEMS: Geometric Reasoning / Data (8 more) ────
+{id:'GR15',cat:'GR',diff:3,
+ stem:'A composite figure is made of a rectangle (8×5) with a triangle on top (base 8, height 3). What is the total area?',
+ opts:['52 sq units','55 sq units','58 sq units','64 sq units','46 sq units','60 sq units'],ans:0,
+ expl:'Find the area of each shape separately, then add them together.',
+ steps:['Rectangle: 8 × 5 = 40.','Triangle: ½ × 8 × 3 = 12.','Total: 40 + 12 = <code>52 sq units</code>.']},
+
+{id:'GR16',cat:'GR',diff:3,
+ stem:'A point is reflected across the y-axis. If the original point is (−3, 7), what are the new coordinates?',
+ opts:['(3, 7)','(−3, −7)','(3, −7)','(−3, 7)','(7, −3)','(7, 3)'],ans:0,
+ expl:'Reflecting across the y-axis flips the sign of the x-coordinate only.',
+ steps:['Rule: (x, y) → (−x, y) when reflecting across the y-axis.','(−3, 7) → (−(−3), 7) = <code>(3, 7)</code>.']},
+
+{id:'GR17',cat:'GR',diff:3,
+ stem:'A data set has values 4, 7, 7, 9, 11, 13, 15. What is the interquartile range (IQR)?',
+ opts:['4','5','6','7','8','9'],ans:2,
+ expl:'IQR = Q3 − Q1. Find the median of the upper and lower halves.',
+ steps:['Ordered: 4, 7, 7, 9, 11, 13, 15. Median = 9.','Lower half: 4, 7, 7 → Q1 = 7.','Upper half: 11, 13, 15 → Q3 = 13.','IQR = 13 − 7 = <code>6</code>.']},
+
+{id:'GR18',cat:'GR',diff:3,
+ stem:'Two points are plotted: A(−2, 3) and B(4, −5). What is the length of segment AB? (Round to nearest tenth.)',
+ opts:['7.2','8.0','9.0','10.0','7.8','6.0'],ans:3,
+ expl:'Use the distance formula: d = √[(x₂−x₁)² + (y₂−y₁)²].',
+ steps:['Δx = 4−(−2) = 6; Δy = −5−3 = −8.','d = √(6² + 8²) = √(36+64) = √100 = <code>10.0</code>.']},
+
+{id:'GR19',cat:'GR',diff:3,
+ stem:'A box-and-whisker plot shows: min=10, Q1=18, median=24, Q3=30, max=40. Which is true?',
+ opts:['The range is 20','The IQR is 22','50% of data is between 18 and 30','The median is 22','The range is 30','75% of data is below 18'],ans:2,
+ expl:'Interpret each part of a box-and-whisker plot using its definitions.',
+ steps:['Range = max−min = 40−10 = 30 (not 20).','IQR = Q3−Q1 = 30−18 = 12 (not 22).','50% of data lies between Q1 and Q3: <code>18 and 30 ✓</code>.']},
+
+{id:'GR20',cat:'GR',diff:3,
+ stem:'A net unfolds into a rectangular prism. The base is 6×4, and the height is 5. What is the total surface area?',
+ opts:['88 sq units','108 sq units','120 sq units','148 sq units','124 sq units','96 sq units'],ans:3,
+ expl:'SA = 2(lw + lh + wh). Substitute and compute all three face pairs.',
+ steps:['lw = 6×4 = 24; lh = 6×5 = 30; wh = 4×5 = 20.','SA = 2(24+30+20) = 2(74) = <code>148 sq units</code>.']},
+
+{id:'GR21',cat:'GR',diff:3,
+ stem:'In a survey of 60 students, 25% prefer math, 40% prefer science, and the rest prefer English. A student is picked at random. What is the probability they prefer English?',
+ opts:['1/4','2/5','7/20','3/10','11/20','1/3'],ans:2,
+ expl:'Find the English percentage first, then express as a fraction.',
+ steps:['Math 25% + Science 40% = 65%.','English = 100% − 65% = 35% = 35/100 = <code>7/20</code>.']},
+
+{id:'GR22',cat:'GR',diff:3,
+ stem:'The mean of a data set of 8 numbers is 15. Six of the numbers are: 12, 18, 10, 16, 9, 21. The other two numbers are equal. What are they?',
+ opts:['13','14','15','16','17','18'],ans:4,
+ expl:'Use mean × count to find the total sum, subtract known values, split remainder equally.',
+ steps:['Total sum: 15 × 8 = 120.','Known sum: 12+18+10+16+9+21 = 86.','Remaining: 120 − 86 = 34 → 34 ÷ 2 = <code>17</code>.']},
+
+// ── EXTRA MEDIUM ITEMS for deeper mid-tier pool ──────────────────
+{id:'NS27',cat:'NS',diff:2,
+ stem:'What is 2/3 + 3/4?',
+ opts:['5/7','5/12','17/12','6/7','11/12','1/2'],ans:2,
+ expl:'Find a common denominator, convert, then add.',
+ steps:['LCD of 3 and 4 = 12.','2/3 = 8/12; 3/4 = 9/12.','8/12 + 9/12 = <code>17/12</code>.']},
+
+{id:'NS28',cat:'NS',diff:2,
+ stem:'What is 4/5 × 15/16?',
+ opts:['60/80','3/4','19/21','12/16','5/8','2/3'],ans:1,
+ expl:'Multiply numerators and denominators, then simplify.',
+ steps:['4 × 15 = 60; 5 × 16 = 80.','60/80 → GCF = 20 → <code>3/4</code>.']},
+
+{id:'AR23',cat:'AR',diff:2,
+ stem:'Which table of values represents the equation y = 3x − 1?',
+ opts:['x=0→1, x=1→4','x=0→−1, x=1→2','x=0→−1, x=1→3','x=0→1, x=2→5','x=0→3, x=1→4','x=0→0, x=1→2'],ans:1,
+ expl:'Substitute each x value into y = 3x − 1 and check the y values.',
+ steps:['x=0: y = 3(0)−1 = −1 ✓.','x=1: y = 3(1)−1 = 2 ✓.','Option B matches: <code>x=0→−1, x=1→2</code>.']},
+
+{id:'AR24',cat:'AR',diff:2,
+ stem:'What is the value of the expression 2a² − 3b when a = 3 and b = −2?',
+ opts:['12','24','10','18','20','−4'],ans:1,
+ expl:'Substitute values carefully, applying order of operations.',
+ steps:['2(3)² − 3(−2).','2(9) + 6.','18 + 6 = <code>24</code>.']},
+
+{id:'GR23',cat:'GR',diff:2,
+ stem:'A parallelogram has a base of 11 cm and a height of 6 cm. What is its area?',
+ opts:['34 cm²','55 cm²','60 cm²','66 cm²','72 cm²','17 cm²'],ans:3,
+ expl:'Area of a parallelogram = base × height.',
+ steps:['A = b × h.','A = 11 × 6 = <code>66 cm²</code>.']},
+
+{id:'GR24',cat:'GR',diff:2,
+ stem:'A point is at (2, −3). It is translated 4 units left and 5 units up. What are its new coordinates?',
+ opts:['(6, 2)','(−2, 2)','(6, −8)','(−2, −8)','(2, 2)','(−2, 8)'],ans:1,
+ expl:'Apply the translation: subtract from x for left, add to y for up.',
+ steps:['Left 4: x = 2 − 4 = −2.','Up 5: y = −3 + 5 = 2.','New point: <code>(−2, 2)</code>.']},
 ];
 
 // Fix AR04 answer: 4y−8=20 → 4y=28 → y=7 → opts index 2 = 'y = 7'? 
@@ -702,6 +886,9 @@ function initState(){
   testItems=[]; testAnswers=[];
   catCounts={NS:0,AR:0,GR:0};
   catRemaining={...BLUEPRINT};
+  catDiffCounts.NS={1:0,2:0,3:0};
+  catDiffCounts.AR={1:0,2:0,3:0};
+  catDiffCounts.GR={1:0,2:0,3:0};
   theta=0; currentIdx=0; timerSec=100*60;
 }
 
@@ -711,18 +898,63 @@ function diffFromTheta(){
   return 2;
 }
 
+// Per-category question counter — tracks how many of each diff have been
+// served per category so we can enforce the minimum medium floor
+const catDiffCounts = {NS:{1:0,2:0,3:0}, AR:{1:0,2:0,3:0}, GR:{1:0,2:0,3:0}};
+
+// Blueprint minimum medium guarantee:
+// Each category of 12–14 items must include at least 2 medium questions
+// regardless of ability — matching real FAST exposure rules.
+const MIN_MEDIUM_PER_CAT = 2;
+
 function selectNext(){
   const needed = Object.keys(catRemaining).filter(c=>catRemaining[c]>0);
   if(!needed.length) return null;
-  // pick category with most remaining
+
+  // Priority 1: serve the category most behind on its blueprint quota
   needed.sort((a,b)=>catRemaining[b]-catRemaining[a]);
   const cat = needed[0];
-  const tDiff = diffFromTheta();
+
   const used = testItems.map(i=>i.id);
   let pool = ITEMS.filter(i=>i.cat===cat && !used.includes(i.id));
   if(!pool.length) return null;
+
+  // Determine target difficulty
+  let tDiff = diffFromTheta();
+
+  // Real FAST rule 1: if this category hasn't hit its medium minimum yet
+  // AND we are running low on remaining slots, guarantee a medium item
+  const medServedThisCat = catDiffCounts[cat][2];
+  const remainingThisCat = catRemaining[cat];
+  if(medServedThisCat < MIN_MEDIUM_PER_CAT && remainingThisCat <= MIN_MEDIUM_PER_CAT - medServedThisCat){
+    tDiff = 2;
+  }
+
+  // Real FAST rule 2: if easy pool for this category is exhausted, step up
+  // (low performer must see harder items once easy items run out)
+  const availableAtDiff = pool.filter(i=>i.diff===tDiff);
+  if(availableAtDiff.length === 0){
+    // Step toward the nearest available difficulty
+    const available = [...new Set(pool.map(i=>i.diff))].sort();
+    tDiff = available.reduce((closest, d) =>
+      Math.abs(d - tDiff) < Math.abs(closest - tDiff) ? d : closest
+    , available[0]);
+  }
+
+  // Real FAST rule 3: hard floor — no student gets more than 60% hard items
+  // in a single category (prevents unfair over-exposure for borderline scorers)
+  const totalServedThisCat = Object.values(catDiffCounts[cat]).reduce((a,b)=>a+b,0);
+  const hardServedThisCat = catDiffCounts[cat][3];
+  const catTotal = BLUEPRINT[cat];
+  if(tDiff === 3 && hardServedThisCat / catTotal >= 0.60){
+    tDiff = 2; // step down to medium
+  }
+
   let best = pool.find(i=>i.diff===tDiff);
-  if(!best){ pool.sort((a,b)=>Math.abs(a.diff-tDiff)-Math.abs(b.diff-tDiff)); best=pool[0]; }
+  if(!best){
+    pool.sort((a,b)=>Math.abs(a.diff-tDiff)-Math.abs(b.diff-tDiff));
+    best=pool[0];
+  }
   return best;
 }
 
@@ -840,6 +1072,7 @@ function advanceQ(){
   if(!item||testItems.length>=TOTAL_Q){finishTest();return;}
   testItems.push(item); testAnswers.push(null);
   catCounts[item.cat]++; catRemaining[item.cat]--;
+  catDiffCounts[item.cat][item.diff]++;
   currentIdx=testItems.length-1;
   renderQ(item,currentIdx); updatePips(); updateAbility();
   document.getElementById('hqn').textContent=currentIdx+1;
