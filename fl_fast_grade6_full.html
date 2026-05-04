@@ -1180,13 +1180,15 @@ function finishTest(){
           <div class="alevel ${lvl.cls}">${lvl.label}</div>
           <div class="ldesc">${lvl.desc}</div>
           <div class="sgauge"><div class="sgfill" style="width:${gw}%"></div></div>
-          <div class="glabels"><span>168</span><span>213</span><span>229</span><span>239</span><span>254</span><span>287</span></div>
-          <div class="lcuts">
-            <div class="lcut lc1 ${lvl.level===1?'active':''}">L1</div>
-            <div class="lcut lc2 ${lvl.level===2?'active':''}">L2</div>
-            <div class="lcut lc3 ${lvl.level===3?'active':''}">L3</div>
-            <div class="lcut lc4 ${lvl.level===4?'active':''}">L4</div>
-            <div class="lcut lc5 ${lvl.level===5?'active':''}">L5</div>
+          <div class="glabels" style="position:relative;height:14px;margin-top:3px;">
+            ${[168,213,229,239,254,287].map(v=>`<span style="position:absolute;left:${Math.round(((v-168)/119)*100)}%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace;">${v}</span>`).join('')}
+          </div>
+          <div class="lcuts" style="display:flex;gap:2px;margin-top:2px;">
+            <div class="lcut lc1 ${lvl.level===1?'active':''}" style="flex:45 none auto;min-width:0;">L1</div>
+            <div class="lcut lc2 ${lvl.level===2?'active':''}" style="flex:16 none auto;min-width:0;">L2</div>
+            <div class="lcut lc3 ${lvl.level===3?'active':''}" style="flex:10 none auto;min-width:0;">L3</div>
+            <div class="lcut lc4 ${lvl.level===4?'active':''}" style="flex:15 none auto;min-width:0;">L4</div>
+            <div class="lcut lc5 ${lvl.level===5?'active':''}" style="flex:34 none auto;min-width:0;">L5</div>
           </div>
         </div>
       </div>
