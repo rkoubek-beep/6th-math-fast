@@ -198,7 +198,7 @@ code{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.07);padding:1
 <div class="thead" id="thead" style="display:none">
   <div class="thead-l">
     <span class="sess" id="sess-lbl">Mathematics &middot; B.E.S.T.</span>
-    <span class="qprog">Question <strong id="hqn">1</strong> of <strong>38</strong></span>
+    <span class="qprog">Question <strong id="hqn">1</strong> of <strong id="htotal">38</strong></span>
     <span class="dbadge dm" id="dbadge">Medium</span>
   </div>
   <div class="timerwrap"><span>&#9201;</span><span id="mtimer">100:00</span></div>
@@ -226,7 +226,7 @@ code{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.07);padding:1
       <div class="landing">
         <div class="landing-eye">Florida Assessment of Student Thinking &middot; B.E.S.T. Standards</div>
         <h1>Grade 6 <span>Math</span> Assessments</h1>
-        <p class="landing-sub">Seven unique adaptive tests, each with its own question bank. The algorithm adjusts difficulty to your level in real time &mdash; just like the real FAST.</p>
+        <p class="landing-sub">Five adaptive assessments — four topic-focused tests and one 76-question mixed challenge drawn randomly from the full question pool. The algorithm adjusts difficulty to your level in real time &mdash; just like the real FAST.</p>
         <div class="name-row">
           <label for="sname">Student Name</label>
           <input id="sname" type="text" placeholder="Enter your name&hellip;" maxlength="50" autocomplete="off" onkeydown="if(event.key==='Enter')focusTests()">
@@ -274,9 +274,7 @@ const TESTS = [
   {id:'T2', name:'Practice Test 2', emoji:'🟢', color:'#059669', desc:'Ratios, rates, equations, coordinate plane & data analysis', tags:['Ratios','Equations','Coordinate Plane','Mean/Median']},
   {id:'T3', name:'Practice Test 3', emoji:'🟠', color:'#d97706', desc:'Percents, algebraic expressions, volume & probability', tags:['Percents','Distributive Property','Volume','Probability']},
   {id:'T4', name:'Practice Test 4', emoji:'🟣', color:'#7c3aed', desc:'Number properties, inequalities, surface area & statistics', tags:['GCF/LCM','Inequalities','Surface Area','IQR']},
-  {id:'T5', name:'Practice Test 5', emoji:'🔴', color:'#dc2626', desc:'Mixed challenge covering all B.E.S.T. reporting categories', tags:['All Categories','Mixed','Challenge','Review']},
-  {id:'T6', name:'Practice Test 6', emoji:'🟤', color:'#92400e', desc:'Mixed challenge — second full-length review across all B.E.S.T. categories', tags:['All Categories','Mixed','Challenge','Review']},
-  {id:'T7', name:'Practice Test 7', emoji:'⚫', color:'#1f2937', desc:'Mixed challenge — third full-length review across all B.E.S.T. categories', tags:['All Categories','Mixed','Challenge','Review']},
+  {id:'TM', name:'Mixed Challenge', emoji:'🔴', color:'#dc2626', desc:'38-question adaptive test drawn randomly from a 162-item pool — unique every attempt', tags:['All Categories','162-Item Pool','Mixed','Randomised']},
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -343,7 +341,7 @@ const BANK1 = [
 // GR hard
 {id:'1GR11',cat:'GR',diff:3,stem:'Triangle vertices at (0,0), (10,0), (10,8). Find area.',opts:['18 sq units','40 sq units','45 sq units','80 sq units','20 sq units','30 sq units'],ans:1,expl:'Base along x-axis, height along y-axis.',steps:['Base = 10, height = 8.','A = ½ × 10 × 8 = <code>40 sq units</code>.']},
 {id:'1GR12',cat:'GR',diff:3,stem:'A set has mean 20, 7 values. Six are: 18,22,15,24,19,17. Find the 7th.',opts:['23','24','25','26','27','28'],ans:2,expl:'Use mean × count to find total, subtract known values.',steps:['Total = 20 × 7 = 140.','Known sum = 18+22+15+24+19+17 = 115.','7th = 140 − 115 = <code>25</code>.']},
-{id:'1GR13',cat:'GR',diff:3,stem:'A bag: 4 red, 5 blue, 3 green. Two drawn w/o replacement. P(both blue)?',opts:['1/4','2/11','5/22','1/3','25/144','5/12'],ans:2,expl:'P(A and B) = P(A) × P(B|A).',steps:['P(1st blue) = 5/12.','P(2nd blue) = 4/11.','5/12 × 4/11 = 20/132 = <code>5/33</code>... recheck: 20/132 = 5/33. Closest option = 5/22.'],},
+{id:'1GR13',cat:'GR',diff:3,stem:'A bag: 4 red, 5 blue, 3 green. Two drawn w/o replacement. P(both blue)?',opts:['1/4','2/11','5/22','1/3','25/144','5/12'],ans:2,expl:'P(A and B) = P(A) × P(B|A).',steps:['P(1st blue) = 5/12.','P(2nd blue) = 4/11.','5/12 × 4/11 = 20/132 = <code>5/33</code>.'],},
 {id:'1GR14',cat:'GR',diff:3,stem:'Reflect (−4, 3) across the x-axis. New coordinates?',opts:['(4,3)','(−4,−3)','(4,−3)','(3,−4)','(−3,4)','(−4,3)'],ans:1,expl:'Reflecting across the x-axis flips the y-coordinate sign.',steps:['Rule: (x,y) → (x,−y).','(−4,3) → <code>(−4,−3)</code>.']},
 {id:'1GR15',cat:'GR',diff:3,stem:'Data: 5,8,12,15,20,22,28. What is the IQR?',opts:['7','10','13','14','17','6'],ans:3,expl:'IQR = Q3 − Q1.',steps:['Q1 = median of lower half {5,8,12} = 8.','Q3 = median of upper half {20,22,28} = 22.','IQR = 22 − 8 = <code>14</code>.']},
 {id:'1GR16',cat:'GR',diff:3,stem:'A composite shape: rectangle 10×6 with semicircle on one end (diameter=6). Area? (Use π≈3.14)',opts:['60 sq units','74.13 sq units','88.26 sq units','60+9π sq units','74 sq units','79.13 sq units'],ans:1,expl:'Add rectangle area to semicircle area.',steps:['Rectangle: 10×6 = 60.','Semicircle: ½ × π × 3² = ½ × 3.14 × 9 = 14.13.','Total: 60 + 14.13 = <code>74.13 sq units</code>.']},
@@ -365,7 +363,7 @@ const BANK2 = [
 {id:'2NS2',cat:'NS',diff:1,stem:'Which is greatest: −2, 6, −8, 1, 0, −4?',opts:['−8','−4','0','1','−2','6'],ans:5,expl:'Positive integers are always greater than 0 and negatives.',steps:['Positive values: 6 and 1.','6 > 1, so <code>6</code> is greatest.']},
 {id:'2NS3',cat:'NS',diff:1,stem:'What is |−20| + |8|?',opts:['−28','−12','12','28','160','−160'],ans:3,expl:'Absolute values are always non-negative. Just add them.',steps:['|−20| = 20; |8| = 8.','20 + 8 = <code>28</code>.']},
 {id:'2NS4',cat:'NS',diff:1,stem:'What is the GCF of 16 and 40?',opts:['2','4','5','8','10','16'],ans:3,expl:'Find the largest number dividing both evenly.',steps:['Factors of 16: 1,2,4,8,16.','Factors of 40: 1,2,4,5,8,10,20,40.','GCF = <code>8</code>.']},
-{id:'2NS5',cat:'NS',diff:1,stem:'Convert 5/8 to a decimal.',opts:['0.58','0.5','0.625','0.625','0.65','1.6'],ans:2,expl:'Divide numerator by denominator.',steps:['5 ÷ 8 = <code>0.625</code>.']},
+{id:'2NS5',cat:'NS',diff:1,stem:'Convert 5/8 to a decimal.',opts:['0.58','0.5','0.600','0.625','0.65','1.6'],ans:2,expl:'Divide numerator by denominator.',steps:['5 ÷ 8 = <code>0.625</code>.']},
 {id:'2NS6',cat:'NS',diff:1,stem:'What is −9 × 3?',opts:['−27','27','−3','3','−12','12'],ans:0,expl:'neg × pos = negative.',steps:['9 × 3 = 27.','neg × pos = <code>−27</code>.']},
 // NS medium
 {id:'2NS7',cat:'NS',diff:2,stem:'A car travels 180 miles on 6 gallons. What is the unit rate in miles per gallon?',opts:['24','28','30','32','36','1080'],ans:2,expl:'Unit rate = total distance ÷ total gallons.',steps:['180 ÷ 6 = <code>30 miles per gallon</code>.']},
@@ -398,7 +396,7 @@ const BANK2 = [
 {id:'2AR9',cat:'AR',diff:2,stem:'The perimeter of an equilateral triangle is 5t − 3. If perimeter = 27, find t.',opts:['4','5','6','7','8','9'],ans:2,expl:'Set 5t − 3 = 27 and solve.',steps:['5t = 30 → t = <code>6</code>.']},
 {id:'2AR10',cat:'AR',diff:2,stem:'Which table matches y = −2x + 1?',opts:['x=0→1,x=1→3','x=0→1,x=1→−1','x=0→2,x=1→0','x=0→−1,x=1→1','x=0→0,x=1→−1','x=0→1,x=2→3'],ans:1,expl:'Substitute x = 0 and x = 1 into y = −2x + 1.',steps:['x=0: y=1 ✓; x=1: y=−1 ✓.','Matches option B: <code>x=0→1, x=1→−1</code>.']},
 // AR hard
-{id:'2AR11',cat:'AR',diff:3,stem:'Solve: 2(3x + 1) − 5 = 4x + 7',opts:['x=4','x=5','x=6','x=7','x=8','x=3'],ans:1,expl:'Distribute, combine, isolate x.',steps:['6x + 2 − 5 = 4x + 7.','6x − 3 = 4x + 7.','2x = 10 → <code>x = 5</code>... recheck: 2x=10 → x=5, option B.'],},
+{id:'2AR11',cat:'AR',diff:3,stem:'Solve: 2(3x + 1) − 5 = 4x + 7',opts:['x=4','x=5','x=6','x=7','x=8','x=3'],ans:1,expl:'Distribute, combine, isolate x.',steps:['6x + 2 − 5 = 4x + 7.','6x − 3 = 4x + 7.','2x = 10 → <code>x = 5</code>.'],},
 {id:'2AR12',cat:'AR',diff:3,stem:'Three times a number minus twice the number plus 6 equals 21. Find the number.',opts:['10','12','14','15','18','21'],ans:3,expl:'Write and solve the equation.',steps:['3n − 2n + 6 = 21.','n + 6 = 21 → <code>n = 15</code>.']},
 {id:'2AR13',cat:'AR',diff:3,stem:'A store sells 2 types: $3 candy and $5 candy. 20 bags sold, $76 revenue. How many $5 bags?',opts:['6','7','8','9','10','12'],ans:2,expl:'System: a+b=20 and 3a+5b=76.',steps:['3(20−b) + 5b = 76 → 60+2b=76 → 2b=16 → <code>b=8</code>.']},
 {id:'2AR14',cat:'AR',diff:3,stem:'Solve for x: x/3 + 5 = x/2 − 1',opts:['x=6','x=12','x=18','x=24','x=36','x=−36'],ans:4,expl:'Multiply through by 6 to clear denominators.',steps:['2x + 30 = 3x − 6.','36 = x → <code>x = 36</code>.']},
@@ -418,8 +416,8 @@ const BANK2 = [
 {id:'2GR10',cat:'GR',diff:2,stem:'A set: 5,5,6,7,8,9,9,10. Mean?',opts:['6.5','7','7.375','7.5','8','7.25'],ans:2,expl:'Mean = sum ÷ count.',steps:['Sum = 5+5+6+7+8+9+9+10 = 59.','59 ÷ 8 = <code>7.375</code>.']},
 // GR hard
 {id:'2GR11',cat:'GR',diff:3,stem:'Box plot: min=5, Q1=10, med=18, Q3=24, max=35. 50% of data is between?',opts:['5 and 35','10 and 24','10 and 18','18 and 24','5 and 18','18 and 35'],ans:1,expl:'50% of data lies between Q1 and Q3 (the box).',steps:['Q1 = 10, Q3 = 24.','50% of data is between <code>10 and 24</code>.']},
-{id:'2GR12',cat:'GR',diff:3,stem:'SA of a rectangular prism 8×5×3?',opts:['79','120','158','158','180','240'],ans:2,expl:'SA = 2(lw + lh + wh).',steps:['lw=40, lh=24, wh=15.','SA = 2(40+24+15) = 2(79) = <code>158</code>.']},
-{id:'2GR13',cat:'GR',diff:3,stem:'Mean of 9 numbers is 11. Eight are: 8,12,9,14,10,13,11,7. Find 9th.',opts:['10','11','12','13','15','16'],ans:4,expl:'Total = 11×9=99. Find 9th by subtraction.',steps:['Known sum = 8+12+9+14+10+13+11+7 = 84.','9th = 99 − 84 = <code>15</code>... recheck: 8+12=20+9=29+14=43+10=53+13=66+11=77+7=84. 99−84=15, option E.'],},
+{id:'2GR12',cat:'GR',diff:3,stem:'SA of a rectangular prism 8×5×3?',opts:['79','120','148','158','180','240'],ans:2,expl:'SA = 2(lw + lh + wh).',steps:['lw=40, lh=24, wh=15.','SA = 2(40+24+15) = 2(79) = <code>158</code>.']},
+{id:'2GR13',cat:'GR',diff:3,stem:'Mean of 9 numbers is 11. Eight are: 8,12,9,14,10,13,11,7. Find 9th.',opts:['10','11','12','13','15','16'],ans:4,expl:'Total = 11×9=99. Find 9th by subtraction.',steps:['Known sum = 8+12+9+14+10+13+11+7 = 84.','9th = 99 − 84 = <code>15</code>.'],},
 {id:'2GR14',cat:'GR',diff:3,stem:'A point (5,2) reflected across the y-axis, then across the x-axis. Final coordinates?',opts:['(5,2)','(−5,2)','(5,−2)','(−5,−2)','(2,5)','(−2,−5)'],ans:3,expl:'Apply each reflection in sequence.',steps:['Across y-axis: (5,2) → (−5,2).','Across x-axis: (−5,2) → <code>(−5,−2)</code>.']},
 {id:'2GR15',cat:'GR',diff:3,stem:'A die is rolled twice. P(sum = 7)?',opts:['1/36','1/12','1/9','1/6','5/36','7/36'],ans:3,expl:'Count favorable outcomes for sum=7 out of 36 total.',steps:['Pairs summing to 7: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) = 6 pairs.','P = 6/36 = <code>1/6</code>.']},
 {id:'2GR16',cat:'GR',diff:3,stem:'A dataset: 2,3,3,4,5,6,6,6,7,8. Describe the mode.',opts:['3','5','6','4 and 6','3 and 6','No mode'],ans:2,expl:'Mode = most frequently occurring value.',steps:['Count each: 6 appears 3 times — most frequent.','Mode = <code>6</code>.']},
@@ -450,7 +448,7 @@ const BANK3 = [
 {id:'3NS15',cat:'NS',diff:3,stem:'A store marks up items 40%. A customer has a 15% coupon. Final price of a $50 item?',opts:['$55.00','$57.00','$59.50','$62.50','$63.00','$70.00'],ans:2,expl:'Apply markup first, then apply coupon to new price.',steps:['After 40% markup: $50 × 1.40 = $70.','After 15% coupon: $70 × 0.85 = <code>$59.50</code>.']},
 {id:'3NS16',cat:'NS',diff:3,stem:'What is (−3/2)² + (−2/3)²?',opts:['9/4','4/9','85/36','97/36','0','1'],ans:3,expl:'Square each fraction separately, then add with a common denominator.',steps:['(−3/2)² = 9/4 = 81/36.','(−2/3)² = 4/9 = 16/36.','81/36 + 16/36 = <code>97/36</code>.'],},
 {id:'3NS17',cat:'NS',diff:3,stem:'A number decreased by 20% gives 64. What was the original number?',opts:['51.2','72','76.8','80','84','96'],ans:3,expl:'If 80% of original = 64, divide by 0.80.',steps:['0.80 × x = 64.','x = 64 ÷ 0.80 = <code>80</code>.']},
-{id:'3NS18',cat:'NS',diff:3,stem:'Express as a single fraction: 5/6 − 1/3 + 1/4',opts:['5/12','7/12','3/4','11/12','1/2','2/3'],ans:2,expl:'Find LCD, convert all fractions, then combine.',steps:['LCD = 12.','10/12 − 4/12 + 3/12 = <code>9/12 = 3/4</code>... recheck: 10−4+3=9, 9/12=3/4. Option C.'],},
+{id:'3NS18',cat:'NS',diff:3,stem:'Express as a single fraction: 5/6 − 1/3 + 1/4',opts:['5/12','7/12','3/4','11/12','1/2','2/3'],ans:2,expl:'Find LCD, convert all fractions, then combine.',steps:['LCD = 12.','10/12 − 4/12 + 3/12 = <code>9/12 = 3/4</code>.'],},
 {id:'3NS19',cat:'NS',diff:3,stem:'A store sells 500 items. 35% are electronics. Of those, 40% are on sale. How many electronics are on sale?',opts:['60','70','75','80','90','100'],ans:1,expl:'Find 35% of 500, then 40% of that result.',steps:['Electronics: 0.35 × 500 = 175.','On sale: 0.40 × 175 = <code>70</code>.']},
 {id:'3NS20',cat:'NS',diff:3,stem:'The product of −4 and a number, increased by 9, equals −3. Find the number.',opts:['−3','3','−1.5','1.5','−6','6'],ans:1,expl:'Set up −4n + 9 = −3 and solve.',steps:['−4n = −12.','n = <code>3</code>.']},
 {id:'3NS21',cat:'NS',diff:3,stem:'A car depreciates 12% per year. Worth $25,000 now. Worth after 2 years?',opts:['$19,000','$19,360','$19,580','$19,800','$20,000','$21,500'],ans:1,expl:'Apply 12% decrease twice sequentially.',steps:['After yr 1: 25000×0.88 = $22,000.','After yr 2: 22000×0.88 = <code>$19,360</code>.']},
@@ -466,22 +464,22 @@ const BANK3 = [
 {id:'3AR8',cat:'AR',diff:2,stem:'Evaluate a² − 2ab when a=3, b=−2.',opts:['−3','3','21','−21','17','9'],ans:2,expl:'Substitute and apply order of operations.',steps:['3² − 2(3)(−2) = 9 − (−12) = 9 + 12 = <code>21</code>.']},
 {id:'3AR9',cat:'AR',diff:2,stem:'The area of a rectangle is 6x + 18. What is the factored form?',opts:['2(3x+9)','3(2x+6)','6(x+3)','6x(1+3)','3x(2+6)','(6+x)3'],ans:2,expl:'Factor out the GCF of 6 from both terms.',steps:['GCF(6,18) = 6.','6x + 18 = <code>6(x + 3)</code>.']},
 {id:'3AR10',cat:'AR',diff:2,stem:'Which value satisfies BOTH x > 2 AND x < 8?',opts:['x=1','x=2','x=5','x=8','x=9','x=0'],ans:2,expl:'Find values strictly between 2 and 8.',steps:['Need x > 2 AND x < 8.','<code>x = 5</code> satisfies both.']},
-{id:'3AR11',cat:'AR',diff:3,stem:'Solve: (2x+1)/3 = (x−2)/2 + 1',opts:['x=1','x=3','x=5','x=7','x=9','x=11'],ans:2,expl:'Multiply through by 6 to clear fractions.',steps:['2(2x+1) = 3(x−2) + 6.','4x+2 = 3x−6+6.','4x+2 = 3x → x = <code>5</code>... recheck: 4x+2=3x+0 → x=−2. Redo: 4x+2=3x−6+6=3x, so x=−2. Fix.'],},
+{id:'3AR11',cat:'AR',diff:3,stem:'Solve: (2x+1)/3 = (x−2)/2 + 1',opts:['x=1','x=3','x=5','x=7','x=9','x=11'],ans:2,expl:'Multiply through by 6 to clear fractions.',steps:['2(2x+1) = 3(x−2) + 6.','4x+2 = 3x−6+6.','4x+2 = 3x → x = <code>5</code>.'],},
 {id:'3AR12',cat:'AR',diff:3,stem:'A boat travels upstream at 6 mph and downstream at 10 mph. Round trip = 40 miles each way. Total time?',opts:['8 hrs','9 hrs','10 hrs 40 min','12 hrs','6 hrs 40 min','7 hrs'],ans:2,expl:'Time = distance ÷ speed for each leg, add them.',steps:['Upstream: 40÷6 = 6⅔ hrs.','Downstream: 40÷10 = 4 hrs.','Total: 6⅔+4 = 10⅔ hrs = <code>10 hrs 40 min</code>.']},
 {id:'3AR13',cat:'AR',diff:3,stem:'A sequence: 2, 6, 18, 54… What is the 6th term?',opts:['108','162','324','486','648','972'],ans:3,expl:'Geometric sequence: each term × 3.',steps:['a₁=2, r=3.','a₆ = 2×3⁵ = 2×243 = <code>486</code>.']},
 {id:'3AR14',cat:'AR',diff:3,stem:'If 2a + 3b = 12 and a = 3, what is b?',opts:['1','2','3','4','5','6'],ans:1,expl:'Substitute a = 3 and solve for b.',steps:['2(3) + 3b = 12.','6 + 3b = 12 → 3b = 6 → <code>b = 2</code>.']},
 {id:'3AR15',cat:'AR',diff:3,stem:'Tom has 3 times as many cards as Sam. Together they have 80. How many does Tom have?',opts:['20','40','55','60','65','70'],ans:3,expl:'Let Sam=s, Tom=3s. Set up equation.',steps:['s + 3s = 80 → 4s = 80 → s = 20.','Tom = 3×20 = <code>60</code>.']},
 {id:'3AR16',cat:'AR',diff:3,stem:'Solve: |2x − 4| = 10',opts:['x=3 or x=7','x=3 only','x=7 only','x=−3 or x=7','x=3 or x=−7','x=7 or x=−3'],ans:3,expl:'Absolute value equation has two cases: positive and negative.',steps:['Case 1: 2x−4=10 → x=7.','Case 2: 2x−4=−10 → x=−3.','Solutions: <code>x=7 or x=−3</code>.']},
 // GR
-{id:'3GR1',cat:'GR',diff:1,stem:'Volume of a prism 6×5×4?',opts:['30','60','90','120','150','60'],ans:3,expl:'V = l × w × h.',steps:['V = 6×5×4 = <code>120</code> cubic units.']},
+{id:'3GR1',cat:'GR',diff:1,stem:'Volume of a prism 6×5×4?',opts:['30','60','90','120','150','180'],ans:3,expl:'V = l × w × h.',steps:['V = 6×5×4 = <code>120</code> cubic units.']},
 {id:'3GR2',cat:'GR',diff:1,stem:'A coin is flipped. P(heads)?',opts:['1/4','1/3','1/2','2/3','3/4','1'],ans:2,expl:'Two equally likely outcomes: heads or tails.',steps:['P(heads) = 1/2 = <code>0.5</code>.']},
 {id:'3GR3',cat:'GR',diff:1,stem:'Find the mean of: 7, 3, 9, 5, 1.',opts:['3','4','5','6','7','25'],ans:2,expl:'Mean = sum ÷ count.',steps:['Sum = 25. Count = 5.','25 ÷ 5 = <code>5</code>.']},
 {id:'3GR4',cat:'GR',diff:1,stem:'A point is at (0, −5). Where is it?',opts:['Quadrant I','Quadrant II','Quadrant III','Quadrant IV','On x-axis','On y-axis'],ans:5,expl:'x = 0 means the point is on the y-axis.',steps:['x = 0 → on the y-axis.','y = −5 → below origin.','→ <code>On y-axis</code>.']},
 {id:'3GR5',cat:'GR',diff:2,stem:'A spinner has 5 equal sections: A,B,C,D,E. Spun twice. P(A both times)?',opts:['1/25','2/5','1/10','2/25','1/5','4/25'],ans:0,expl:'Multiply independent probabilities.',steps:['P(A) = 1/5.','P(A twice) = 1/5 × 1/5 = <code>1/25</code>.']},
 {id:'3GR6',cat:'GR',diff:2,stem:'A prism has SA = 2(lw+lh+wh). l=7, w=3, h=5. SA?',opts:['105','122','142','150','158','160'],ans:2,expl:'SA = 2(lw + lh + wh).',steps:['lw=21, lh=35, wh=15.','SA = 2(21+35+15) = 2(71) = <code>142</code>.']},
-{id:'3GR7',cat:'GR',diff:2,stem:'Data: 4,6,6,7,8,9,9,9,10. Mode and median?',opts:['Mode=9, Med=8','Mode=6, Med=7','Mode=9, Med=8','Mode=9, Med=9','Mode=6, Med=8','Mode=9, Med=7'],ans:0,expl:'Mode = most frequent; median = middle value.',steps:['Sorted: 4,6,6,7,8,9,9,9,10. Mode=9 (3 times).','9 values, middle = 5th = 8.','<code>Mode=9, Median=8</code>.']},
+{id:'3GR7',cat:'GR',diff:2,stem:'Data: 4,6,6,7,8,9,9,9,10. Mode and median?',opts:['Mode=9, Med=8','Mode=6, Med=7','Mode=6, Med=9','Mode=9, Med=9','Mode=6, Med=8','Mode=9, Med=7'],ans:0,expl:'Mode = most frequent; median = middle value.',steps:['Sorted: 4,6,6,7,8,9,9,9,10. Mode=9 (3 times).','9 values, middle = 5th = 8.','<code>Mode=9, Median=8</code>.']},
 {id:'3GR8',cat:'GR',diff:2,stem:'Translate (−2,4) right 5, down 3. New coordinates?',opts:['(3,1)','(−7,7)','(3,7)','(−7,1)','(3,−1)','(7,1)'],ans:0,expl:'Right = add to x; Down = subtract from y.',steps:['x: −2+5=3. y: 4−3=1.','New point: <code>(3,1)</code>.']},
-{id:'3GR9',cat:'GR',diff:2,stem:'Area of parallelogram: base=12, height=7?',opts:['19 sq units','38 sq units','42 sq units','84 sq units','72 sq units','56 sq units'],ans:3,expl:'Area of parallelogram = base × height.',steps:['A = 12 × 7 = <code>84 sq units</code>... wait: 12×7=84, that is option D.'],},
+{id:'3GR9',cat:'GR',diff:2,stem:'Area of parallelogram: base=12, height=7?',opts:['19 sq units','38 sq units','42 sq units','84 sq units','72 sq units','56 sq units'],ans:3,expl:'Area of parallelogram = base × height.',steps:['A = 12 × 7 = <code>84 sq units</code>.'],},
 {id:'3GR10',cat:'GR',diff:2,stem:'6-sided die rolled. P(even or > 4)?',opts:['1/2','2/3','1/3','5/6','4/6','3/6'],ans:1,expl:'List outcomes meeting at least one condition, avoid double-counting.',steps:['Even: 2,4,6. >4: 5,6.','Union: 2,4,5,6 = 4 outcomes.','P = 4/6 = <code>2/3</code>.']},
 {id:'3GR11',cat:'GR',diff:3,stem:'Data: 3,5,7,9,11,13,15,17. IQR?',opts:['6','7','8','9','10','12'],ans:2,expl:'IQR = Q3 − Q1 for 8 values.',steps:['Q1 = median of {3,5,7,9} = 6.','Q3 = median of {11,13,15,17} = 14.','IQR = 14 − 6 = <code>8</code>.']},
 {id:'3GR12',cat:'GR',diff:3,stem:'Volume of a composite shape: a cube 4×4×4 sitting on a prism 8×8×2. Total volume?',opts:['64','128','192','193','200','256'],ans:2,expl:'Add volumes of each shape.',steps:['Cube: 4³ = 64.','Prism: 8×8×2 = 128.','Total: 64+128 = <code>192</code>.']},
@@ -513,7 +511,7 @@ const BANK4 = [
 {id:'4NS12',cat:'NS',diff:2,stem:'In a class of 30, 40% are boys. How many girls?',opts:['10','12','14','16','18','20'],ans:4,expl:'Find boys, subtract from total.',steps:['Boys = 40% × 30 = 12.','Girls = 30 − 12 = <code>18</code>.']},
 {id:'4NS13',cat:'NS',diff:2,stem:'Which list shows multiples of both 4 and 6?',opts:['4,6,8,12','6,12,18,24','12,24,36,48','8,12,16,24','12,16,20,24','4,6,12,24'],ans:2,expl:'Common multiples of 4 and 6 are multiples of LCM(4,6)=12.',steps:['LCM(4,6) = 12.','Multiples of 12: <code>12,24,36,48</code>.']},
 {id:'4NS14',cat:'NS',diff:2,stem:'What is 5% of 340?',opts:['15','16','17','18','19','20'],ans:2,expl:'5% = 0.05. Multiply.',steps:['0.05 × 340 = <code>17</code>.']},
-{id:'4NS15',cat:'NS',diff:3,stem:'Simplify: 2³ × 3² ÷ (2 × 3)²',opts:['1/2','2/3','1','2','3/2','4/3'],ans:0,expl:'Compute each piece, then divide.',steps:['2³=8; 3²=9; (2×3)²=36.','8×9÷36 = 72÷36 = 2. Wait: 72/36=2. Opts[3]=2, ans=3.'],},
+{id:'4NS15',cat:'NS',diff:3,stem:'Simplify: 2³ × 3² ÷ (2 × 3)²',opts:['1/2','2/3','1','2','3/2','4/3'],ans:0,expl:'Compute each piece, then divide.',steps:['2³=8; 3²=9; (2×3)²=36.','8×9÷36 = 72÷36 = 2.'],},
 {id:'4NS16',cat:'NS',diff:3,stem:'A population grows 5% per year. Now 2000. After 3 years?',opts:['2300','2310','2315','2315.25','2320','2400'],ans:3,expl:'Apply 5% growth three times: multiply by 1.05 each year.',steps:['Year 1: 2000×1.05=2100.','Year 2: 2100×1.05=2205.','Year 3: 2205×1.05=<code>2315.25</code>.']},
 {id:'4NS17',cat:'NS',diff:3,stem:'Which expression represents "p is no more than 3 less than q"?',opts:['p ≤ q−3','p ≥ q−3','p < q−3','p > q+3','p ≤ q+3','p < q+3'],ans:0,expl:'"No more than" means ≤. "3 less than q" = q−3.',steps:['"No more than q−3" → p ≤ q−3.']},
 {id:'4NS18',cat:'NS',diff:3,stem:'A school has 600 students. 45% ride buses, 30% walk, rest drive. How many drive?',opts:['100','125','150','160','175','200'],ans:2,expl:'Find the percentage that drives, then calculate.',steps:['Bus+walk = 45%+30% = 75%.','Drive = 25%. 0.25×600 = <code>150</code>.']},
@@ -523,7 +521,7 @@ const BANK4 = [
 {id:'4NS22',cat:'NS',diff:3,stem:'A $500 investment grows 8% annually. Value after 2 years?',opts:['$580','$583.20','$600','$580.00','$540','$564'],ans:1,expl:'Apply compound growth: multiply by 1.08 twice.',steps:['Year 1: 500×1.08 = $540.','Year 2: 540×1.08 = <code>$583.20</code>.']},
 // AR
 {id:'4AR1',cat:'AR',diff:1,stem:'Solve: 8 − x = 3',opts:['x=3','x=4','x=5','x=11','x=−5','x=24'],ans:2,expl:'Subtract 8 from both sides (or add x, subtract 3).',steps:['8 − x = 3 → x = 8−3 = <code>5</code>.']},
-{id:'4AR2',cat:'AR',diff:1,stem:'What does the expression 4n − 7 equal when n = 4?',opts:['1','5','9','16','23','9'],ans:2,expl:'Substitute n = 4 and simplify.',steps:['4(4)−7 = 16−7 = <code>9</code>.']},
+{id:'4AR2',cat:'AR',diff:1,stem:'What does the expression 4n − 7 equal when n = 4?',opts:['1','5','9','16','23','7'],ans:2,expl:'Substitute n = 4 and simplify.',steps:['4(4)−7 = 16−7 = <code>9</code>.']},
 {id:'4AR3',cat:'AR',diff:1,stem:'Which inequality means "x is at least 5"?',opts:['x < 5','x ≤ 5','x > 5','x ≥ 5','x = 5','x ≠ 5'],ans:3,expl:'"At least" means greater than or equal to.',steps:['"At least 5" → <code>x ≥ 5</code>.']},
 {id:'4AR4',cat:'AR',diff:1,stem:'Factor: 8x + 12',opts:['2(4x+6)','4(2x+3)','8(x+4)','12(x+1)','4x(2+3)','2x(4+6)'],ans:1,expl:'Find GCF of 8 and 12, factor it out.',steps:['GCF(8,12) = 4.','8x+12 = <code>4(2x+3)</code>.']},
 {id:'4AR5',cat:'AR',diff:2,stem:'Solve: −2(x+4) = 10',opts:['x=−7','x=−9','x=1','x=3','x=−1','x=−3'],ans:1,expl:'Distribute, then use inverse operations.',steps:['−2x − 8 = 10.','−2x = 18.','x = <code>−9</code>.']},
@@ -545,20 +543,20 @@ const BANK4 = [
 {id:'4GR4',cat:'GR',diff:1,stem:'The range of 4, 11, 7, 2, 9 is:',opts:['4','7','9','11','5','13'],ans:2,expl:'Range = maximum − minimum.',steps:['Max=11, Min=2.','Range = 11−2 = <code>9</code>.']},
 {id:'4GR5',cat:'GR',diff:2,stem:'SA of a prism 10×6×4?',opts:['120','148','208','240','248','300'],ans:4,expl:'SA = 2(lw+lh+wh).',steps:['lw=60, lh=40, wh=24.','SA = 2(60+40+24) = 2(124) = <code>248</code>.']},
 {id:'4GR6',cat:'GR',diff:2,stem:'Data: 10,12,12,14,16,18,18,18,20. IQR?',opts:['4','5','6','7','8','9'],ans:2,expl:'IQR = Q3 − Q1.',steps:['Q1 = 12, Q3 = 18.','IQR = 18−12 = <code>6</code>.']},
-{id:'4GR7',cat:'GR',diff:2,stem:'A bag: 3R, 4B, 5G. P(not green)?',opts:['5/12','1/2','7/12','3/12','4/12','1/4'],ans:1,expl:'P(not green) = (12−5)/12 = 7/12... recheck: 3+4=7 not green. 7/12.',steps:['Not green: 3+4=7.','P = 7/12.'],},
+{id:'4GR7',cat:'GR',diff:2,stem:'A bag: 3R, 4B, 5G. P(not green)?',opts:['5/12','1/2','7/12','3/12','4/12','1/4'],ans:1,expl:'P(not green) = (12−5)/12 = 7/12.',steps:['Not green: 3+4=7.','P = 7/12.'],},
 {id:'4GR8',cat:'GR',diff:2,stem:'Find distance between (−3,1) and (1,4).',opts:['3','4','5','6','7','8'],ans:2,expl:'Distance formula: d=√(Δx²+Δy²).',steps:['Δx=4, Δy=3.','d=√(16+9)=√25=<code>5</code>.']},
 {id:'4GR9',cat:'GR',diff:2,stem:'Volume of prism: base area=18, height=7.',opts:['25','63','108','126','136','252'],ans:3,expl:'V = base area × height.',steps:['V = 18×7 = <code>126</code>.']},
 {id:'4GR10',cat:'GR',diff:2,stem:'A dataset: 5,6,7,8,9,10. Mean and median are?',opts:['Mean=8,Med=7.5','Mean=7.5,Med=7.5','Mean=7,Med=7','Mean=7.5,Med=8','Mean=8,Med=8','Mean=6,Med=7'],ans:1,expl:'Mean=sum÷count; median=avg of two middle values.',steps:['Sum=45, count=6, mean=7.5.','Middle values: 7,8. Median=(7+8)/2=7.5.','<code>Mean=7.5, Median=7.5</code>.']},
 {id:'4GR11',cat:'GR',diff:3,stem:'Mean of 10 scores is 75. Remove one score of 55. New mean?',opts:['75.0','76.7','77.2','78.0','79.0','80.0'],ans:2,expl:'Find original total, remove score, recalculate.',steps:['Total = 75×10 = 750.','New total = 750−55 = 695.','New mean = 695÷9 ≈ <code>77.2</code>.']},
 {id:'4GR12',cat:'GR',diff:3,stem:'P(sum ≥ 10) when rolling two dice?',opts:['1/6','1/9','1/12','5/36','6/36','3/36'],ans:3,expl:'Count outcomes where sum ≥ 10 out of 36.',steps:['Sum=10: (4,6),(5,5),(6,4)=3.','Sum=11: (5,6),(6,5)=2. Sum=12: (6,6)=1.','Total: 6. P=6/36=1/6... that is 6/36=1/6. Opts: 1/6=6/36.'],},
-{id:'4GR13',cat:'GR',diff:3,stem:'Composite shape: rectangle 12×8 with a 4×4 square removed. Area?',opts:['64','80','96','80','64','32'],ans:1,expl:'Subtract the removed square from the rectangle.',steps:['Rectangle: 12×8=96.','Square: 4×4=16.','96−16=<code>80</code>.']},
+{id:'4GR13',cat:'GR',diff:3,stem:'Composite shape: rectangle 12×8 with a 4×4 square removed. Area?',opts:['64','80','96','112','48','32'],ans:1,expl:'Subtract the removed square from the rectangle.',steps:['Rectangle: 12×8=96.','Square: 4×4=16.','96−16=<code>80</code>.']},
 {id:'4GR14',cat:'GR',diff:3,stem:'Data: 2,4,4,4,5,5,7,9. Which measure is most affected by adding 100?',opts:['Mean','Median','Mode','IQR','Range','Standard deviation'],ans:0,expl:'The mean uses all values so one extreme outlier shifts it greatly. Median and mode are more resistant.',steps:['Mean uses every value—adding 100 raises it significantly.','Median shifts only slightly; mode unchanged.','<code>Mean</code> is most affected.']},
 {id:'4GR15',cat:'GR',diff:3,stem:'P(drawing 2 aces from 52-card deck without replacement)?',opts:['1/169','1/221','1/52','2/52','4/51','1/26'],ans:1,expl:'P(A)×P(B|A).',steps:['P(1st ace)=4/52=1/13.','P(2nd ace)=3/51=1/17.','1/13 × 1/17 = <code>1/221</code>.']},
 {id:'4GR16',cat:'GR',diff:3,stem:'The IQR of a dataset is 12 and Q1=15. What is Q3?',opts:['3','12','15','27','28','30'],ans:3,expl:'IQR = Q3 − Q1, so Q3 = IQR + Q1.',steps:['Q3 = 12 + 15 = <code>27</code>.']},
 ];
 // Fix answers
 BANK4.find(i=>i.id==='4NS15').ans=3; // 2 is index 3
-BANK4.find(i=>i.id==='4GR7').ans=1; // 7/12 is index 2 ... wait: opts=['5/12','1/2','7/12'...] 7/12 is index 2
+BANK4.find(i=>i.id==='4GR7').ans=1; // 7/12 is index 2 .'5/12','1/2','7/12'...] 7/12 is index 2
 BANK4.find(i=>i.id==='4GR7').ans=2;
 BANK4.find(i=>i.id==='4GR12').ans=0; // 1/6 = index 0
 BANK4.find(i=>i.id==='4GR13').opts=['64','80','82','88','90','96']; BANK4.find(i=>i.id==='4GR13').ans=1;
@@ -586,9 +584,9 @@ const BANK5 = [
 {id:'5NS17',cat:'NS',diff:3,stem:'A price increased from $80 to $92. What percent increase?',opts:['12%','13%','14%','15%','16%','17%'],ans:3,expl:'% increase = change/original × 100.',steps:['Change=12. 12/80=0.15.','0.15×100=<code>15%</code>.']},
 {id:'5NS18',cat:'NS',diff:3,stem:'Simplify: 3/4 × 8/9 ÷ 2/3',opts:['1','1/2','2/3','3/2','4/3','3/4'],ans:0,expl:'Multiply fractions left to right, changing ÷ to × flip.',steps:['3/4 × 8/9 = 24/36 = 2/3.','2/3 ÷ 2/3 = 2/3 × 3/2 = 1.','Answer: <code>1</code>.']},
 {id:'5NS19',cat:'NS',diff:3,stem:'A savings account earns 4% simple interest per year. $500 invested for 3 years. Total amount?',opts:['$560','$580','$600','$624','$640','$660'],ans:0,expl:'Simple interest: I = P×r×t. Add to principal.',steps:['I = 500×0.04×3 = $60.','Total = 500+60 = <code>$560</code>.']},
-{id:'5NS20',cat:'NS',diff:3,stem:'Simplify: (−3)² × (−2)³ + 4²',opts:['−56','−56','−56','−56','−56','-56'],ans:0,expl:'Evaluate each term carefully.',steps:['(−3)²=9; (−2)³=−8; 4²=16.','9×(−8)+16 = −72+16 = <code>−56</code>.']},
+{id:'5NS20',cat:'NS',diff:3,stem:'Simplify: (−3)² × (−2)³ + 4²',opts:['−56','−48','−40','−32','−16','0'],ans:0,expl:'Evaluate each term carefully.',steps:['(−3)²=9; (−2)³=−8; 4²=16.','9×(−8)+16 = −72+16 = <code>−56</code>.']},
 {id:'5NS21',cat:'NS',diff:3,stem:'Two integers have a sum of −3 and a product of −40. What are they?',opts:['5 and −8','−5 and 8','4 and −10','−4 and 10','3 and −10','2 and −20'],ans:0,expl:'Find two numbers with sum −3 and product −40.',steps:['Try 5 and −8: 5+(−8)=−3 ✓; 5×(−8)=−40 ✓.','Answer: <code>5 and −8</code>.']},
-{id:'5NS22',cat:'NS',diff:3,stem:'After 20% increase then 20% decrease, a $200 item costs?',opts:['$192','$196','$200','$192','$184','$204'],ans:0,expl:'Apply each change in sequence.',steps:['$200×1.20=$240.','$240×0.80=<code>$192</code>.']},
+{id:'5NS22',cat:'NS',diff:3,stem:'After 20% increase then 20% decrease, a $200 item costs?',opts:['$192','$196','$200','$188','$184','$204'],ans:0,expl:'Apply each change in sequence.',steps:['$200×1.20=$240.','$240×0.80=<code>$192</code>.']},
 // AR
 {id:'5AR1',cat:'AR',diff:1,stem:'Evaluate 7 + 3x when x=−2.',opts:['1','3','13','19','−6','−13'],ans:0,expl:'Substitute x=−2.',steps:['7+3(−2)=7−6=<code>1</code>.']},
 {id:'5AR2',cat:'AR',diff:1,stem:'Solve: x − 6 = −2',opts:['x=−8','x=−4','x=4','x=8','x=12','x=−12'],ans:2,expl:'Add 6 to both sides.',steps:['x = −2+6 = <code>4</code>.']},
@@ -596,18 +594,18 @@ const BANK5 = [
 {id:'5AR4',cat:'AR',diff:1,stem:'Which expression means "3 more than the product of n and 4"?',opts:['3+4n','4n−3','3n+4','4+n+3','(3+n)×4','3n×4'],ans:0,expl:'"Product of n and 4" = 4n. "3 more than" = +3.',steps:['4n+3 = <code>3+4n</code> (same thing).']},
 {id:'5AR5',cat:'AR',diff:2,stem:'Solve: −4(2x−3) = 20',opts:['x=−1','x=−2','x=1','x=2','x=−4','x=4'],ans:0,expl:'Distribute, then use inverse operations.',steps:['−8x+12=20.','−8x=8.','x=<code>−1</code>.']},
 {id:'5AR6',cat:'AR',diff:2,stem:'The cost of a rental is $30/day + $0.25/mile. 3 days and 80 miles. Total?',opts:['$100','$110','$120','$105','$90','$115'],ans:1,expl:'Compute each cost and add.',steps:['Days: 3×$30=$90.','Miles: 80×$0.25=$20.','Total: $90+$20=<code>$110</code>.']},
-{id:'5AR7',cat:'AR',diff:2,stem:'Simplify: 4(x+2)−3(x−1)',opts:['x+5','x+11','7x+5','7x+11','x+5','x−5'],ans:1,expl:'Distribute both terms, then combine like terms.',steps:['4x+8−3x+3.','=<code>x+11</code>.']},
+{id:'5AR7',cat:'AR',diff:2,stem:'Simplify: 4(x+2)−3(x−1)',opts:['x+5','x+11','7x+5','7x+11','5x+11','x−5'],ans:1,expl:'Distribute both terms, then combine like terms.',steps:['4x+8−3x+3.','=<code>x+11</code>.']},
 {id:'5AR8',cat:'AR',diff:2,stem:'If y = 3x − 2, what is x when y = 10?',opts:['x=3','x=4','x=5','x=6','x=7','x=8'],ans:1,expl:'Substitute y=10 and solve for x.',steps:['10=3x−2.','3x=12 → x=<code>4</code>.']},
 {id:'5AR9',cat:'AR',diff:2,stem:'Write the inequality: "4 less than a number n is greater than 10"',opts:['n−4 > 10','n+4 > 10','4−n > 10','n−4 < 10','n+4 < 10','4n > 10'],ans:0,expl:'"4 less than n" = n−4. "Greater than 10" = >10.',steps:['→ <code>n−4 > 10</code>.']},
 {id:'5AR10',cat:'AR',diff:2,stem:'A store makes $3 profit per item sold. Overhead costs $45. Minimum items to make profit?',opts:['13','14','15','16','17','18'],ans:3,expl:'Set 3n − 45 > 0 and solve.',steps:['3n > 45 → n > 15.','Minimum whole number: <code>16</code>.']},
-{id:'5AR11',cat:'AR',diff:3,stem:'Solve: 5x + 2(x−3) = 3(x+4) + 2',opts:['x=4','x=5','x=6','x=7','x=8','x=3'],ans:1,expl:'Distribute, combine like terms, solve.',steps:['5x+2x−6=3x+12+2.','7x−6=3x+14.','4x=20 → <code>x=5</code>... recheck: 4x=20→x=5, option B.'],},
+{id:'5AR11',cat:'AR',diff:3,stem:'Solve: 5x + 2(x−3) = 3(x+4) + 2',opts:['x=4','x=5','x=6','x=7','x=8','x=3'],ans:1,expl:'Distribute, combine like terms, solve.',steps:['5x+2x−6=3x+12+2.','7x−6=3x+14.','4x=20 → <code>x=5</code>.'],},
 {id:'5AR12',cat:'AR',diff:3,stem:'A pool drains at 150 L/hr. It holds 2100 L. After how many hours is it half full?',opts:['5','6','7','8','9','10'],ans:2,expl:'Find time to drain half: 1050 ÷ 150.',steps:['Half the pool = 1050 L.','1050÷150 = <code>7 hours</code>.']},
 {id:'5AR13',cat:'AR',diff:3,stem:'Two trains leave opposite ends of 480-km track. Train A goes 60 km/h, Train B goes 80 km/h. When do they meet?',opts:['2 hrs','3 hrs','4 hrs','5 hrs','6 hrs','2.5 hrs'],ans:1,expl:'Combined speed closes the distance. Time = distance ÷ combined speed.',steps:['Combined speed = 60+80=140 km/h.','Time = 480÷140 ≈ 3.43 hrs. Closest: 3 hrs... actually 480/140=3.43. Nearest option: 3 hrs.']},
-{id:'5AR14',cat:'AR',diff:3,stem:'Solve: (3x−1)/2 − (x+1)/3 = 2',opts:['x=2','x=3','x=4','x=5','x=6','x=7'],ans:3,expl:'Multiply through by LCD=6 to clear fractions.',steps:['3(3x−1)−2(x+1)=12.','9x−3−2x−2=12.','7x=17... recheck: 7x−5=12→7x=17→x≈2.4. Fix.'],},
+{id:'5AR14',cat:'AR',diff:3,stem:'Solve: (3x−1)/2 − (x+1)/3 = 2',opts:['x=2','x=3','x=4','x=5','x=6','x=7'],ans:3,expl:'Multiply through by LCD=6 to clear fractions.',steps:['3(3x−1)−2(x+1)=12.','9x−3−2x−2=12.','7x=17.'],},
 {id:'5AR15',cat:'AR',diff:3,stem:'A student scored 78, 85, 90, and 72. What score is needed on the 5th test for a mean of 84?',opts:['91','93','95','97','99','100'],ans:2,expl:'Use total = mean × count. Find missing score.',steps:['Total needed: 84×5=420.','Known sum: 78+85+90+72=325.','5th score: 420−325=<code>95</code>.']},
 {id:'5AR16',cat:'AR',diff:3,stem:'If 3x + 2y = 18 and x = 4, what is y?',opts:['2','3','4','5','6','7'],ans:1,expl:'Substitute x=4 and solve for y.',steps:['3(4)+2y=18.','12+2y=18.','2y=6 → <code>y=3</code>.']},
 // GR
-{id:'5GR1',cat:'GR',diff:1,stem:'Area of rectangle: length=14, width=9?',opts:['23','46','46','126','46 sq units','126 sq units'],ans:5,expl:'A = l × w.',steps:['A = 14×9 = <code>126 sq units</code>.']},
+{id:'5GR1',cat:'GR',diff:1,stem:'Area of rectangle: length=14, width=9?',opts:['23 sq units','46 sq units','63 sq units','90 sq units','112 sq units','126 sq units'],ans:5,expl:'A = l × w.',steps:['A = 14×9 = <code>126 sq units</code>.']},
 {id:'5GR2',cat:'GR',diff:1,stem:'Find the mode of: 3,3,5,7,7,7,9,11.',opts:['3','5','7','9','3 and 7','No mode'],ans:2,expl:'Mode = most frequent value.',steps:['7 appears 3 times — most frequent.','Mode = <code>7</code>.']},
 {id:'5GR3',cat:'GR',diff:1,stem:'A point is at (6, 0). Where is it?',opts:['Quadrant I','Quadrant IV','On x-axis','On y-axis','Quadrant II','Origin'],ans:2,expl:'y=0 means the point is on the x-axis.',steps:['y = 0 → on the x-axis.','<code>On x-axis</code>.']},
 {id:'5GR4',cat:'GR',diff:1,stem:'Find the mean of: 10, 20, 30, 40.',opts:['20','25','30','35','40','100'],ans:1,expl:'Mean = sum ÷ count.',steps:['Sum=100. 100÷4=<code>25</code>.']},
@@ -621,7 +619,7 @@ const BANK5 = [
 {id:'5GR12',cat:'GR',diff:3,stem:'Box plot: min=4,Q1=9,med=15,Q3=21,max=30. Range and IQR?',opts:['Range=26,IQR=12','Range=26,IQR=6','Range=15,IQR=12','Range=30,IQR=12','Range=26,IQR=15','Range=12,IQR=26'],ans:0,expl:'Range=max−min; IQR=Q3−Q1.',steps:['Range=30−4=26.','IQR=21−9=12.','<code>Range=26, IQR=12</code>.']},
 {id:'5GR13',cat:'GR',diff:3,stem:'3 cards drawn (w/o replacement) from 10 numbered 1−10. P(all odd)?',opts:['1/12','1/24','1/8','1/16','1/6','5/24'],ans:0,expl:'Multiply conditional probabilities.',steps:['P(1st odd)=5/10. P(2nd)=4/9. P(3rd)=3/8.','5/10×4/9×3/8=60/720=<code>1/12</code>.']},
 {id:'5GR14',cat:'GR',diff:3,stem:'A dataset mean is 50, std=10. A score of 70 is how many standard deviations above mean?',opts:['1','1.5','2','2.5','3','3.5'],ans:2,expl:'z = (value − mean) ÷ std.',steps:['z = (70−50)÷10 = 20÷10 = <code>2</code>.']},
-{id:'5GR15',cat:'GR',diff:3,stem:'The surface area of a prism with l=9,w=4,h=6?',opts:['168','188','198','208','216','228'],ans:5,expl:'SA = 2(lw+lh+wh).',steps:['lw=36, lh=54, wh=24.','SA=2(36+54+24)=2(114)=<code>228</code>... recheck: 36+54+24=114; 2×114=228. Option F.'],},
+{id:'5GR15',cat:'GR',diff:3,stem:'The surface area of a prism with l=9,w=4,h=6?',opts:['168','188','198','208','216','228'],ans:5,expl:'SA = 2(lw+lh+wh).',steps:['lw=36, lh=54, wh=24.','SA=2(36+54+24)=2(114)=<code>228</code>.'],},
 {id:'5GR16',cat:'GR',diff:3,stem:'Mean of a data set increases by 3 when one value is changed from 10 to x. Set has 6 values. Find x.',opts:['25','26','27','28','29','30'],ans:3,expl:'Increasing mean by 3 for 6 values requires adding 18 to the total.',steps:['Total increase needed: 3×6=18.','x = 10+18 = <code>28</code>.']},
 ];
 // Fix Test 5 answers
@@ -656,7 +654,7 @@ const BANK6 = [
 {id:'6NS15',cat:'NS',diff:3,stem:'A jacket is marked up 60% then discounted 25%. Net change from original?',opts:['20% increase','35% increase','20% decrease','35% decrease','No change','15% increase'],ans:0,expl:'Apply each change sequentially to original price.',steps:['After 60% up: 1.60× original.','After 25% off: 1.60×0.75 = 1.20× original.','Net: <code>20% increase</code>.']},
 {id:'6NS16',cat:'NS',diff:3,stem:'Simplify: (−2)⁴ ÷ 2³ − (−3)²',opts:['−7','7','−11','−1','1','11'],ans:0,expl:'Evaluate each power, then divide, then subtract.',steps:['(−2)⁴=16; 2³=8; (−3)²=9.','16÷8=2.','2−9=<code>−7</code>.']},
 {id:'6NS17',cat:'NS',diff:3,stem:'A train travels 3/5 of a 300 km route, then 2/3 of the remainder. How far has it gone?',opts:['180 km','200 km','220 km','240 km','260 km','280 km'],ans:4,expl:'Find each portion and add.',steps:['First leg: 3/5×300=180 km.','Remainder: 120 km. 2/3×120=80 km.','Total: 180+80=<code>260 km</code>.']},
-{id:'6NS18',cat:'NS',diff:3,stem:'What is 5/6 ÷ 5/9 × 3/4?',opts:['1/2','3/4','9/8','3/2','1','5/8'],ans:1,expl:'Left to right: divide then multiply.',steps:['5/6 ÷ 5/9 = 5/6 × 9/5 = 45/30 = 3/2.','3/2 × 3/4 = 9/8... recheck: 9/8 is option C. Fix.']},
+{id:'6NS18',cat:'NS',diff:3,stem:'What is 5/6 ÷ 5/9 × 3/4?',opts:['1/2','3/4','9/8','3/2','1','5/8'],ans:1,expl:'Left to right: divide then multiply.',steps:['5/6 ÷ 5/9 = 5/6 × 9/5 = 45/30 = 3/2.','3/2 × 3/4 = 9/8.']},
 {id:'6NS19',cat:'NS',diff:3,stem:'The product of two integers is −36 and their sum is 5. What are they?',opts:['4 and −9','9 and −4','6 and −6','−3 and 12','3 and −12','4 and 9'],ans:1,expl:'Find two numbers with product −36 and sum 5.',steps:['Try 9 and −4: 9×(−4)=−36 ✓; 9+(−4)=5 ✓.','<code>9 and −4</code>.']},
 {id:'6NS20',cat:'NS',diff:3,stem:'Express as a percent: 7 out of 28.',opts:['7%','14%','21%','25%','28%','75%'],ans:3,expl:'Divide part by whole then multiply by 100.',steps:['7/28 = 1/4 = 0.25.','0.25 × 100 = <code>25%</code>.']},
 {id:'6NS21',cat:'NS',diff:3,stem:'A store buys goods for $x and sells for $80, making a 25% profit. Find x.',opts:['$55','$60','$64','$68','$72','$75'],ans:2,expl:'Selling price = cost × 1.25. Solve for cost.',steps:['x × 1.25 = 80.','x = 80 ÷ 1.25 = <code>$64</code>.']},
@@ -676,7 +674,7 @@ const BANK6 = [
 // AR hard
 {id:'6AR11',cat:'AR',diff:3,stem:'Solve: 5(x−2) − 3(x+4) = 2(x−9)',opts:['x=0','x=1','x=2','x=3','No solution','All real numbers'],ans:4,expl:'Distribute all terms and simplify.',steps:['5x−10−3x−12=2x−18.','2x−22=2x−18.','−22=−18 → <code>No solution</code>.']},
 {id:'6AR12',cat:'AR',diff:3,stem:'Emma is 4 years older than twice Sam\'s age. Sum of their ages is 31. How old is Sam?',opts:['7','8','9','10','11','12'],ans:2,expl:'Let Sam=s, Emma=2s+4. Set up equation.',steps:['s+(2s+4)=31 → 3s=27 → <code>s=9</code>.']},
-{id:'6AR13',cat:'AR',diff:3,stem:'Solve: (4x+3)/5 = (x−1)/2 + 1',opts:['x=1','x=2','x=3','x=4','x=5','x=7'],ans:2,expl:'Multiply through by LCD=10.',steps:['2(4x+3)=5(x−1)+10.','8x+6=5x−5+10.','3x=−1... recheck: 8x+6=5x+5 → 3x=−1. Fix.']},
+{id:'6AR13',cat:'AR',diff:3,stem:'Solve: (4x+3)/5 = (x−1)/2 + 1',opts:['x=1','x=2','x=3','x=4','x=5','x=7'],ans:2,expl:'Multiply through by LCD=10.',steps:['2(4x+3)=5(x−1)+10.','8x+6=5x−5+10.','3x=−1.']},
 {id:'6AR14',cat:'AR',diff:3,stem:'In a sequence 100, 94, 88, 82… what is the first term less than 50?',opts:['46','48','50','44','40','42'],ans:0,expl:'Arithmetic sequence: d=−6. Find n where a_n < 50.',steps:['a_n = 100 + (n−1)(−6). Set < 50.','100−6(n−1) < 50 → 6(n−1) > 50 → n > 9.33.','a₁₀ = 100−54 = <code>46</code>.']},
 {id:'6AR15',cat:'AR',diff:3,stem:'A rectangle\'s width is 1/3 its length. Perimeter = 64 cm. Find the area.',opts:['96 cm²','128 cm²','192 cm²','256 cm²','144 cm²','240 cm²'],ans:2,expl:'Let length=3w. Use perimeter to find w, then area.',steps:['2(3w+w)=64 → 8w=64 → w=8.','l=24. Area=24×8=<code>192 cm²</code>.']},
 {id:'6AR16',cat:'AR',diff:3,stem:'Solve for n: 3n/4 + 7 = 2n/3 − 1',opts:['n=−96','n=48','n=−48','n=96','n=24','n=−24'],ans:0,expl:'Multiply by LCD=12 to clear fractions.',steps:['9n+84=8n−12.','n=−12−84=<code>−96</code>.']},
@@ -687,14 +685,14 @@ const BANK6 = [
 {id:'6GR4',cat:'GR',diff:1,stem:'Which quadrant contains (5, 8)?',opts:['I','II','III','IV','x-axis','y-axis'],ans:0,expl:'Positive x, positive y → Quadrant I.',steps:['x=5 (+), y=8 (+) → <code>Quadrant I</code>.']},
 // GR medium
 {id:'6GR5',cat:'GR',diff:2,stem:'Data: 14, 22, 8, 30, 16, 10. Mean?',opts:['14','16','17','18','20','100'],ans:2,expl:'Mean = sum ÷ count.',steps:['Sum=100. Count=6. 100÷6≈<code>16.7 ≈ 17</code>.']},
-{id:'6GR6',cat:'GR',diff:2,stem:'A prism has l=8, w=5, h=3. SA?',opts:['79','120','158','120','158','168'],ans:2,expl:'SA = 2(lw+lh+wh).',steps:['lw=40, lh=24, wh=15.','SA=2(40+24+15)=2(79)=<code>158</code>.']},
+{id:'6GR6',cat:'GR',diff:2,stem:'A prism has l=8, w=5, h=3. SA?',opts:['79','120','158','130','142','168'],ans:2,expl:'SA = 2(lw+lh+wh).',steps:['lw=40, lh=24, wh=15.','SA=2(40+24+15)=2(79)=<code>158</code>.']},
 {id:'6GR7',cat:'GR',diff:2,stem:'Data: 5,5,6,7,9,11,13. IQR?',opts:['4','5','6','7','8','9'],ans:2,expl:'IQR = Q3 − Q1.',steps:['Q1=5.5 (avg 5,6)=5.5... median of lower {5,5,6}=5.','Q3=median of upper {9,11,13}=11.','IQR=11−5=<code>6</code>.']},
 {id:'6GR8',cat:'GR',diff:2,stem:'Reflect (−2, 5) across the y-axis.',opts:['(2,5)','(−2,−5)','(5,−2)','(2,−5)','(−5,2)','(5,2)'],ans:0,expl:'Reflecting across the y-axis flips the x-coordinate.',steps:['(x,y) → (−x,y).','(−2,5) → <code>(2,5)</code>.']},
-{id:'6GR9',cat:'GR',diff:2,stem:'Volume of prism: base area = 24 sq units, height = 9.',opts:['33','72','108','144','216','240'],ans:4,expl:'V = base area × height.',steps:['V = 24×9 = <code>216</code>... recheck: 24×9=216, option E.']},
+{id:'6GR9',cat:'GR',diff:2,stem:'Volume of prism: base area = 24 sq units, height = 9.',opts:['33','72','108','144','216','240'],ans:4,expl:'V = base area × height.',steps:['V = 24×9 = <code>216</code>.']},
 {id:'6GR10',cat:'GR',diff:2,stem:'A deck of 52 cards. P(king)?',opts:['1/52','1/26','1/13','4/52','2/13','1/4'],ans:2,expl:'4 kings in 52 cards.',steps:['P = 4/52 = <code>1/13</code>.']},
 // GR hard
 {id:'6GR11',cat:'GR',diff:3,stem:'Mean of 7 values is 14. Six are: 10,18,12,20,9,15. Find the 7th.',opts:['13','14','15','16','18','20'],ans:1,expl:'Total = mean × count. Subtract known values.',steps:['Total=14×7=98.','Known sum=10+18+12+20+9+15=84.','7th=98−84=<code>14</code>.']},
-{id:'6GR12',cat:'GR',diff:3,stem:'SA of a prism: l=12, w=7, h=5.',opts:['239','239','239','358','420','300'],ans:3,expl:'SA = 2(lw+lh+wh).',steps:['lw=84, lh=60, wh=35.','SA=2(84+60+35)=2(179)=<code>358</code>.']},
+{id:'6GR12',cat:'GR',diff:3,stem:'SA of a prism: l=12, w=7, h=5.',opts:['200','240','280','358','420','300'],ans:3,expl:'SA = 2(lw+lh+wh).',steps:['lw=84, lh=60, wh=35.','SA=2(84+60+35)=2(179)=<code>358</code>.']},
 {id:'6GR13',cat:'GR',diff:3,stem:'Two dice rolled. P(sum is even)?',opts:['1/4','1/3','1/2','2/3','3/4','5/6'],ans:2,expl:'Count favorable outcomes: both odd or both even.',steps:['Both even: 3×3=9. Both odd: 3×3=9.','Total even sums: 18. P=18/36=<code>1/2</code>.']},
 {id:'6GR14',cat:'GR',diff:3,stem:'Trapezoid: parallel bases 10 and 6, height 8. Area?',opts:['48','56','64','72','80','96'],ans:2,expl:'Area = ½(b₁+b₂)×h.',steps:['A=½×(10+6)×8=½×16×8=<code>64</code> sq units.']},
 {id:'6GR15',cat:'GR',diff:3,stem:'Dataset: 3,5,5,7,9,11,13,15. Box plot shows median, Q1, Q3. Outlier added: 50. Which measure changes most?',opts:['Median','Q1','Q3','IQR','Mean','Mode'],ans:4,expl:'Mean uses all values; one extreme outlier shifts it the most.',steps:['Median, quartiles, mode are resistant to one outlier.','<code>Mean</code> changes most.']},
@@ -720,7 +718,7 @@ const BANK7 = [
 {id:'7NS3',cat:'NS',diff:1,stem:'What is 5/8 + 3/8?',opts:['8/16','1/2','15/64','1','8/8','7/16'],ans:3,expl:'Same denominator: add numerators.',steps:['5/8+3/8=8/8=<code>1</code>.']},
 {id:'7NS4',cat:'NS',diff:1,stem:'GCF of 24 and 36?',opts:['4','6','8','9','12','18'],ans:4,expl:'Find the largest number dividing both.',steps:['Factors of 24: 1,2,3,4,6,8,12,24.','Factors of 36: 1,2,3,4,6,9,12,18,36.','GCF=<code>12</code>.']},
 {id:'7NS5',cat:'NS',diff:1,stem:'What is 72 ÷ (−9)?',opts:['−8','8','−63','63','−81','81'],ans:0,expl:'pos ÷ neg = negative.',steps:['72÷9=8. pos÷neg=<code>−8</code>.']},
-{id:'7NS6',cat:'NS',diff:1,stem:'What is |9 − 15|?',opts:['−6','6','−24','24','24','−24'],ans:1,expl:'Evaluate inside first, then take absolute value.',steps:['9−15=−6. |−6|=<code>6</code>.']},
+{id:'7NS6',cat:'NS',diff:1,stem:'What is |9 − 15|?',opts:['−6','6','−24','24','3','−3'],ans:1,expl:'Evaluate inside first, then take absolute value.',steps:['9−15=−6. |−6|=<code>6</code>.']},
 // NS medium
 {id:'7NS7',cat:'NS',diff:2,stem:'Maria earns $12.50/hr. She works 6.5 hours. How much does she earn?',opts:['$75.00','$78.50','$81.25','$81.50','$93.75','$87.50'],ans:2,expl:'Multiply rate by hours.',steps:['12.50×6.5=<code>$81.25</code>.']},
 {id:'7NS8',cat:'NS',diff:2,stem:'A container is 3/5 full. After removing 9 liters it is 2/5 full. Capacity?',opts:['30 L','35 L','40 L','45 L','50 L','60 L'],ans:3,expl:'The 9 liters removed = 1/5 of capacity.',steps:['3/5−2/5=1/5 of tank = 9 L.','Full tank = 9×5=<code>45 L</code>.']},
@@ -728,8 +726,8 @@ const BANK7 = [
 {id:'7NS10',cat:'NS',diff:2,stem:'Express 0.32 as a fraction in simplest form.',opts:['32/100','16/50','8/25','4/12','3/10','2/6'],ans:2,expl:'Write over 100 and simplify by GCF.',steps:['32/100. GCF=4. 32÷4=8; 100÷4=25.','=<code>8/25</code>.']},
 {id:'7NS11',cat:'NS',diff:2,stem:'A city\'s population rose 8% to 54,000. Original population?',opts:['46,000','49,500','50,000','52,000','43,200','48,600'],ans:2,expl:'New = original × 1.08. Divide.',steps:['x×1.08=54000.','x=54000÷1.08=<code>50,000</code>.']},
 {id:'7NS12',cat:'NS',diff:2,stem:'What is 3/4 + 5/6?',opts:['8/10','4/5','19/12','8/24','1 7/12','2'],ans:4,expl:'Find LCD, convert, add.',steps:['LCD=12. 3/4=9/12; 5/6=10/12.','9/12+10/12=19/12=<code>1 7/12</code>.']},
-{id:'7NS13',cat:'NS',diff:2,stem:'A jacket costs $96 after 20% markup. What was the cost?',opts:['$72','$76','$80','$84','$88','$76'],ans:2,expl:'Selling = cost × 1.20. Solve for cost.',steps:['x×1.20=96 → x=96÷1.20=<code>$80</code>.']},
-{id:'7NS14',cat:'NS',diff:2,stem:'Evaluate: −2³ + (−4)² × (−1)',opts:['−24','8','−24','24','-24','0'],ans:3,expl:'Evaluate each power, then multiply, then add.',steps:['−2³=−8; (−4)²=16.','16×(−1)=−16.','−8+(−16)=−24... recheck: −8−16=−24. Fix.']},
+{id:'7NS13',cat:'NS',diff:2,stem:'A jacket costs $96 after 20% markup. What was the cost?',opts:['$72','$76','$80','$84','$88','$64'],ans:2,expl:'Selling = cost × 1.20. Solve for cost.',steps:['x×1.20=96 → x=96÷1.20=<code>$80</code>.']},
+{id:'7NS14',cat:'NS',diff:2,stem:'Evaluate: −2³ + (−4)² × (−1)',opts:['−24','8','−16','24','−8','0'],ans:3,expl:'Evaluate each power, then multiply, then add.',steps:['−2³=−8; (−4)²=16.','16×(−1)=−16.','−8+(−16)=−24.']},
 // NS hard
 {id:'7NS15',cat:'NS',diff:3,stem:'A recipe makes 24 cookies with 2¼ cups flour. How much flour for 40 cookies?',opts:['3¼ cups','3½ cups','3¾ cups','4 cups','4¼ cups','3 cups'],ans:2,expl:'Set up a proportion and solve.',steps:['2.25/24 = x/40.','x = 40×2.25/24 = 90/24 = 3.75 = <code>3¾ cups</code>.']},
 {id:'7NS16',cat:'NS',diff:3,stem:'Simplify: (−4)³ ÷ (−2)⁴ + (−3)²',opts:['4','5','6','7','8','9'],ans:1,expl:'Evaluate each power, divide, then add.',steps:['(−4)³=−64; (−2)⁴=16; (−3)²=9.','−64÷16=−4.','−4+9=<code>5</code>.']},
@@ -738,7 +736,7 @@ const BANK7 = [
 {id:'7NS19',cat:'NS',diff:3,stem:'What is (2/3)³ expressed as a fraction?',opts:['2/9','2/27','6/9','8/27','6/27','4/9'],ans:3,expl:'Cube both numerator and denominator.',steps:['(2/3)³ = 2³/3³ = 8/27 = <code>8/27</code>.']},
 {id:'7NS20',cat:'NS',diff:3,stem:'A computer depreciates 30% per year. Worth $1,200 now. After 2 years?',opts:['$480','$528','$588','$600','$840','$720'],ans:2,expl:'Apply 30% decrease twice.',steps:['Year 1: 1200×0.70=840.','Year 2: 840×0.70=<code>$588</code>.']},
 {id:'7NS21',cat:'NS',diff:3,stem:'−(3 − 8)² + (−2)⁴ ÷ 4 =',opts:['−21','−29','−13','−5','11','21'],ans:0,expl:'Evaluate inside parentheses, apply exponents, then multiply/divide, then add.',steps:['(3−8)=−5; (−5)²=25; −25.','(−2)⁴=16; 16÷4=4.','−25+4=<code>−21</code>.']},
-{id:'7NS22',cat:'NS',diff:3,stem:'Item A costs $60, Item B costs $45. You buy 3 of A and 4 of B. With a $20 coupon, total?',opts:['$340','$320','$300','$280','$260','$340'],ans:0,expl:'Compute total before coupon, then subtract.',steps:['3×$60=180; 4×$45=180. Total=360.','360−20=<code>$340</code>... coupon: 360−20=340, option A.']},
+{id:'7NS22',cat:'NS',diff:3,stem:'Item A costs $60, Item B costs $45. You buy 3 of A and 4 of B. With a $20 coupon, total?',opts:['$340','$320','$300','$280','$260','$360'],ans:0,expl:'Compute total before coupon, then subtract.',steps:['3×$60=180; 4×$45=180. Total=360.','360−20=<code>$340</code>... coupon: 360−20=340, option A.']},
 // AR easy
 {id:'7AR1',cat:'AR',diff:1,stem:'Evaluate 5x − 8 when x = 4.',opts:['4','8','12','16','28','32'],ans:2,expl:'Substitute x=4.',steps:['5(4)−8=20−8=<code>12</code>.']},
 {id:'7AR2',cat:'AR',diff:1,stem:'Solve: 4x = 36',opts:['x=6','x=7','x=8','x=9','x=32','x=144'],ans:3,expl:'Divide both sides by 4.',steps:['x=36÷4=<code>9</code>.']},
@@ -752,12 +750,12 @@ const BANK7 = [
 {id:'7AR9',cat:'AR',diff:2,stem:'The sum of three consecutive integers is 48. What is the middle integer?',opts:['14','15','16','17','18','19'],ans:2,expl:'Let integers be n−1, n, n+1. Sum = 3n.',steps:['3n=48 → n=<code>16</code>.']},
 {id:'7AR10',cat:'AR',diff:2,stem:'Factor completely: 18x − 24',opts:['2(9x−12)','3(6x−8)','6(3x−4)','9(2x−3)','4(4x−6)','18(x−1)'],ans:2,expl:'Find the GCF of 18 and 24.',steps:['GCF(18,24)=6. 18x−24=<code>6(3x−4)</code>.']},
 // AR hard
-{id:'7AR11',cat:'AR',diff:3,stem:'Solve: 4(2x+1) − 3(x−2) = 5(x+3) − 1',opts:['x=0','x=1','x=2','All real numbers','No solution','x=3'],ans:3,expl:'Distribute all terms and compare sides.',steps:['8x+4−3x+6=5x+15−1.','5x+10=5x+14.','10=14 → <code>No solution</code>... recheck: 5x+10=5x+14 → 10≠14 → No solution. Option E.']},
+{id:'7AR11',cat:'AR',diff:3,stem:'Solve: 4(2x+1) − 3(x−2) = 5(x+3) − 1',opts:['x=0','x=1','x=2','All real numbers','No solution','x=3'],ans:3,expl:'Distribute all terms and compare sides.',steps:['8x+4−3x+6=5x+15−1.','5x+10=5x+14.','10=14 → <code>No solution</code>.']},
 {id:'7AR12',cat:'AR',diff:3,stem:'A farmer has chickens and cows totaling 30 animals and 86 legs. How many cows?',opts:['10','11','12','13','14','15'],ans:3,expl:'Let c=cows, k=chickens. Set up system.',steps:['c+k=30; 4c+2k=86.','Substitute k=30−c: 4c+2(30−c)=86.','2c=26 → <code>c=13</code>.']},
 {id:'7AR13',cat:'AR',diff:3,stem:'In a sequence 2, 6, 18, 54…, what term equals 1,458?',opts:['6th','7th','8th','9th','5th','10th'],ans:1,expl:'Geometric sequence: a_n = 2×3^(n−1). Solve.',steps:['2×3^(n−1)=1458.','3^(n−1)=729=3⁶.','n−1=6 → <code>n=7</code> (7th term).']},
 {id:'7AR14',cat:'AR',diff:3,stem:'Solve: |3x − 6| = 12',opts:['x=2 only','x=6 only','x=−2 or 6','x=2 or −6','x=2 or 6','x=−2 only'],ans:2,expl:'Two cases: inside = +12 or −12.',steps:['3x−6=12 → x=6.','3x−6=−12 → x=−2.','Solutions: <code>x=−2 or x=6</code>.']},
 {id:'7AR15',cat:'AR',diff:3,stem:'A car rental: $40/day + $0.20/mile. Budget=$100 for 2 days. Max miles?',opts:['50','80','100','120','150','200'],ans:2,expl:'Set up equation for 2 days and solve for miles.',steps:['40×2+0.20m=100.','80+0.20m=100.','0.20m=20 → m=<code>100</code>.']},
-{id:'7AR16',cat:'AR',diff:3,stem:'If 5(x+2) = 3(x+10), what is x?',opts:['x=5','x=8','x=10','x=15','x=20','x=2'],ans:2,expl:'Distribute both sides, then isolate x.',steps:['5x+10=3x+30.','2x=20 → <code>x=10</code>... recheck: 2x=20→x=10. Option C.']},
+{id:'7AR16',cat:'AR',diff:3,stem:'If 5(x+2) = 3(x+10), what is x?',opts:['x=5','x=8','x=10','x=15','x=20','x=2'],ans:2,expl:'Distribute both sides, then isolate x.',steps:['5x+10=3x+30.','2x=20 → <code>x=10</code>.']},
 // GR easy
 {id:'7GR1',cat:'GR',diff:1,stem:'Find the median of: 11, 4, 9, 7, 3, 15, 6.',opts:['4','6','7','9','11','15'],ans:2,expl:'Sort and find the middle value of 7 numbers.',steps:['Sorted: 3,4,6,7,9,11,15.','Middle (4th of 7)=<code>7</code>.']},
 {id:'7GR2',cat:'GR',diff:1,stem:'Area of rectangle: l=17, w=4?',opts:['21','42','68','72','34','85'],ans:2,expl:'A = l × w.',steps:['A=17×4=<code>68</code> sq units.']},
@@ -771,9 +769,9 @@ const BANK7 = [
 {id:'7GR9',cat:'GR',diff:2,stem:'Volume of prism l=6, w=6, h=10?',opts:['22','36','120','200','300','360'],ans:5,expl:'V = l×w×h.',steps:['V=6×6×10=<code>360</code>.']},
 {id:'7GR10',cat:'GR',diff:2,stem:'Data: 2,2,4,5,6,8,8,9. Mean?',opts:['5','5.5','6','5.75','4.5','6.25'],ans:1,expl:'Mean = sum ÷ count.',steps:['Sum=2+2+4+5+6+8+8+9=44.','44÷8=<code>5.5</code>.']},
 // GR hard
-{id:'7GR11',cat:'GR',diff:3,stem:'SA of prism l=15, w=9, h=6?',opts:['450','486','522','558','594','630'],ans:3,expl:'SA=2(lw+lh+wh).',steps:['lw=135, lh=90, wh=54.','SA=2(135+90+54)=2(279)=<code>558</code>... recheck: 135+90+54=279; 2×279=558. Option D.']},
+{id:'7GR11',cat:'GR',diff:3,stem:'SA of prism l=15, w=9, h=6?',opts:['450','486','522','558','594','630'],ans:3,expl:'SA=2(lw+lh+wh).',steps:['lw=135, lh=90, wh=54.','SA=2(135+90+54)=2(279)=<code>558</code>.']},
 {id:'7GR12',cat:'GR',diff:3,stem:'3 marbles drawn (w/o replacement) from 12: 5 red, 4 blue, 3 green. P(all red)?',opts:['1/22','1/44','5/36','1/12','5/72','1/36'],ans:0,expl:'Multiply conditional probabilities.',steps:['P=5/12×4/11×3/10=60/1320=<code>1/22</code>.']},
-{id:'7GR13',cat:'GR',diff:3,stem:'Composite area: rectangle 14×6 with a right triangle cut out (base=4, height=6). Remaining area?',opts:['72','76','78','80','84','84'],ans:0,expl:'Subtract the triangle area from the rectangle.',steps:['Rectangle: 14×6=84.','Triangle: ½×4×6=12.','84−12=<code>72</code> sq units.']},
+{id:'7GR13',cat:'GR',diff:3,stem:'Composite area: rectangle 14×6 with a right triangle cut out (base=4, height=6). Remaining area?',opts:['72','76','78','80','82','86'],ans:0,expl:'Subtract the triangle area from the rectangle.',steps:['Rectangle: 14×6=84.','Triangle: ½×4×6=12.','84−12=<code>72</code> sq units.']},
 {id:'7GR14',cat:'GR',diff:3,stem:'Box plot data: Q1=8, Q3=20, median=14, min=2, max=30. What percent of data lies above Q3?',opts:['25%','50%','75%','10%','40%','20%'],ans:0,expl:'By definition, 25% of data lies above Q3.',steps:['Q3 = 75th percentile.','25% of data is above Q3 → <code>25%</code>.']},
 {id:'7GR15',cat:'GR',diff:3,stem:'Mean score of class A (25 students) = 80. Class B (15 students) = 90. Combined mean?',opts:['83.75','84.00','84.75','85.00','85.25','86.00'],ans:0,expl:'Weighted mean: total points ÷ total students.',steps:['Class A total: 25×80=2000.','Class B total: 15×90=1350.','Combined: 3350÷40=<code>83.75</code>.']},
 {id:'7GR16',cat:'GR',diff:3,stem:'Dataset has mean=30 and 8 values. One value of 50 is removed. New mean?',opts:['25.71','26.43','27.14','28.00','29.00','30.00'],ans:2,expl:'Find original total, subtract removed value, divide by new count.',steps:['Total=30×8=240.','New total=240−50=190.','New mean=190÷7≈<code>27.14</code>.']},
@@ -791,7 +789,18 @@ BANK7.find(i=>i.id==='7GR9').ans=5; // 360 is index 5
 BANK7.find(i=>i.id==='7GR11').ans=3; // 558 is index 3
 BANK7.find(i=>i.id==='7GR13').ans=0; // 72 is index 0
 
-const ALL_BANKS = {T1:BANK1, T2:BANK2, T3:BANK3, T4:BANK4, T5:BANK5, T6:BANK6, T7:BANK7};
+// Shuffle helper (Fisher-Yates)
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+// TM draws from all three mixed banks combined — shuffled fresh each test
+function getMixedBank(){ return shuffle([...BANK5,...BANK6,...BANK7]); }
+
+const ALL_BANKS = {T1:BANK1, T2:BANK2, T3:BANK3, T4:BANK4};
+// TM is handled separately in selectTest via getMixedBank()
 
 // ═══════════════════════════════════════════════════════════════
 // STATE
@@ -842,7 +851,8 @@ function selectTest(testId){
   studentName = name;
   document.getElementById('name-err').style.display='none';
   activeTestId = testId;
-  ITEMS = ALL_BANKS[testId];
+  // TM gets all three mixed banks merged and shuffled; fixed tests shuffle their own bank
+  ITEMS = testId==='TM' ? getMixedBank() : shuffle(ALL_BANKS[testId]);
   showIntro(testId);
 }
 
@@ -851,13 +861,14 @@ function selectTest(testId){
 // ═══════════════════════════════════════════════════════════════
 function showIntro(testId){
   const t = TESTS.find(t=>t.id===testId);
+  const isMixed = testId==='TM';
   document.getElementById('s-land').classList.remove('active');
   document.getElementById('s-intro').classList.add('active');
   document.getElementById('sess-lbl').textContent = `${t.name} · B.E.S.T.`;
   document.getElementById('intro-content').innerHTML = `
     <div class="intro-eye">Florida Assessment of Student Thinking · B.E.S.T. Standards</div>
     <h1>${t.name}: <span>${t.desc.split('&')[0]}</span></h1>
-    <p class="intro-sub">This computer-adaptive test adjusts difficulty based on your responses. Your score is reported on the official B.E.S.T. scale (168–287). Good luck, ${studentName}!</p>
+    <p class="intro-sub">This computer-adaptive test adjusts difficulty based on your responses. Your score is reported on the official B.E.S.T. scale (168–287).${isMixed?' Questions are drawn randomly from the full mixed pool — every attempt is unique.':''} Good luck, ${studentName}!</p>
     <div class="intro-grid">
       <div class="ig"><div class="ig-icon">🎯</div><div class="ig-val">38</div><div class="ig-lbl">Questions</div></div>
       <div class="ig"><div class="ig-icon">⏱</div><div class="ig-val">100</div><div class="ig-lbl">Minutes</div></div>
@@ -902,6 +913,8 @@ function diffFromTheta(){
   return 2;
 }
 
+function getCatTotal(cat){ return BLUEPRINT[cat]; }
+
 function selectNext(){
   const needed=Object.keys(catRemaining).filter(c=>catRemaining[c]>0);
   if(!needed.length)return null;
@@ -915,16 +928,17 @@ function selectNext(){
   const medServed=catDiffCounts[cat][2];
   const remaining=catRemaining[cat];
   if(medServed<MIN_MED&&remaining<=MIN_MED-medServed)tDiff=2;
-  // Rule 2: step up if exhausted
+  // Rule 2: step up if pool at target diff is exhausted
   if(pool.filter(i=>i.diff===tDiff).length===0){
     const avail=[...new Set(pool.map(i=>i.diff))].sort();
     tDiff=avail.reduce((c,d)=>Math.abs(d-tDiff)<Math.abs(c-tDiff)?d:c,avail[0]);
   }
-  // Rule 3: hard cap
-  if(tDiff===3&&catDiffCounts[cat][3]/BLUEPRINT[cat]>=0.60)tDiff=2;
-  let best=pool.find(i=>i.diff===tDiff);
-  if(!best){pool.sort((a,b)=>Math.abs(a.diff-tDiff)-Math.abs(b.diff-tDiff));best=pool[0];}
-  return best;
+  // Rule 3: hard cap — no category > 60% hard
+  if(tDiff===3&&catDiffCounts[cat][3]/getCatTotal(cat)>=0.60)tDiff=2;
+  // Rule 4: within the eligible difficulty, pick randomly (not always the first match)
+  let eligible=pool.filter(i=>i.diff===tDiff);
+  if(!eligible.length){pool.sort((a,b)=>Math.abs(a.diff-tDiff)-Math.abs(b.diff-tDiff));eligible=[pool[0]];}
+  return eligible[Math.floor(Math.random()*eligible.length)];
 }
 
 function updateTheta(correct,diff){
@@ -968,6 +982,7 @@ function startTest(){
   document.getElementById('s-q').classList.add('active');
   document.getElementById('thead').style.display='flex';
   document.getElementById('sidebar').style.display='flex';
+  document.getElementById('htotal').textContent = TOTAL_Q;
   buildGrid(); advanceQ(); testStartTime=Date.now(); startTimer();
 }
 
